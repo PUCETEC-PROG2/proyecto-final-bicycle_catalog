@@ -1,6 +1,6 @@
-SELECT * FROM city_cyclist_brand
+SELECT * FROM city_cyclist_brandbikes
 
-INSERT INTO city_cyclist_brand (brand_name) VALUES
+INSERT INTO city_cyclist_brandbikes (brand_bike) VALUES
 ('Trek'),
 ('Specialized'),
 ('Giant'),
@@ -21,6 +21,34 @@ INSERT INTO city_cyclist_brand (brand_name) VALUES
 ('Ridley'),
 ('De Rosa'),
 ('Salsa');
+
+SELECT * FROM city_cyclist_brandproducts
+
+INSERT INTO city_cyclist_brandproducts (brand_product) VALUES
+('Schwalbe'),
+('Continental'),
+('Michelin'),
+('Kenda'),
+('Topeak'),
+('Lezyne'),
+('Crankbrothers'),
+('Park Tool'),
+('Muc-Off'),
+('Finish Line'),
+('Cateye'),
+('Bontrager'),
+('Kryptonite'),
+('Ortlieb'),
+('Selle Italia'),
+('Brooks'),
+('Fizik'),
+('Lizard Skins'),
+('Axiom'),
+('Shimano'),
+('SRAM'),
+('Giro'),
+('Poc');
+
 
 SELECT * FROM city_cyclist_category
 
@@ -115,56 +143,31 @@ INSERT INTO city_cyclist_bike (model_name, price, stock, description, brand_id, 
 
 
 
-SELECT * FROM city_cyclist_brand
-
-INSERT INTO city_cyclist_brand (brand_name) VALUES
-('Schwalbe'),
-('Continental'),
-('Michelin'),
-('Kenda'),
-('Topeak'),
-('Lezyne'),
-('Crankbrothers'),
-('Park Tool'),
-('Muc-Off'),
-('Finish Line'),
-('Cateye'),
-('Bontrager'),
-('Kryptonite'),
-('Ortlieb'),
-('Selle Italia'),
-('Brooks'),
-('Fizik'),
-('Lizard Skins'),
-('Axiom'),
-('Shimano'),
-('SRAM'),
-('Giro'),
-('Poc');
 
 
 SELECT * FROM city_cyclist_product
 
+
 INSERT INTO city_cyclist_product (product_name, product_category, price, stock, description, brand_id, category_id) VALUES
-('Aro Schwalbe 700x25', 'Aros', 50.99, 20, 'Aro de alta calidad para bicicletas de ruta.', 21, 1),
-('Casco Giro Synthe', 'Casco', 220.00, 15, 'Casco aerodinámico y ligero.', 42, 2),
-('Frenos Shimano Ultegra', 'Frenos', 150.00, 30, 'Frenos de alto rendimiento.', 40, 1),
-('Luz Cateye Volt 1600', 'Luces', 120.00, 50, 'Luz delantera potente para ciclismo.', 31, 3),
-('Pedales Crankbrothers Egg', 'Pedales', 85.00, 40, 'Pedales ligeros y resistentes.', 27, 4),
-('Rueda Continental GP 5000', 'Rueda', 75.99, 25, 'Rueda de alto rendimiento.', 22, 1),
-('Casco Poc Octal', 'Casco', 250.00, 10, 'Casco ultraligero con gran ventilación.', 43, 2),
-('Frenos SRAM Force', 'Frenos', 180.00, 20, 'Frenos hidráulicos para ruta.', 41, 1),
-('Pedales Shimano SPD', 'Pedales', 60.00, 35, 'Pedales automáticos para MTB.', 40, 3),
-('Luz Bontrager Ion Pro', 'Luces', 130.00, 25, 'Luz recargable de alta luminosidad.', 32, 4),
-('Aro Continental Race', 'Aros', 55.99, 30, 'Aro ligero para carreras.', 22, 1),
-('Casco Bontrager Starvos', 'Casco', 150.00, 20, 'Casco versátil para carretera.', 32, 2),
-('Frenos Campagnolo Record', 'Frenos', 200.00, 18, 'Frenos de alto rendimiento.', 22, 1),
-('Luz Lezyne Lite Drive 1000XL', 'Luces', 90.00, 60, 'Luz potente y compacta.', 26, 3),
-('Pedales Look Keo 2 Max', 'Pedales', 70.00, 25, 'Pedales para carretera.', 40, 1),
-('Rueda Mavic Ksyrium Elite', 'Rueda', 180.00, 12, 'Rueda ligera y resistente.', 22, 1),
+('Aro Schwalbe 700x25', 'Aros', 50.99, 20, 'Aro de alta calidad para bicicletas de ruta.', 1, 1),
+('Casco Giro Synthe', 'Casco', 220.00, 15, 'Casco aerodinámico y ligero.', 22, 2),
+('Frenos Shimano Ultegra', 'Frenos', 150.00, 30, 'Frenos de alto rendimiento.', 20, 1),
+('Luz Cateye Volt 1600', 'Luces', 120.00, 50, 'Luz delantera potente para ciclismo.', 11, 3),
+('Pedales Crankbrothers Egg', 'Pedales', 85.00, 40, 'Pedales ligeros y resistentes.', 7, 4),
+('Rueda Continental GP 5000', 'Rueda', 75.99, 25, 'Rueda de alto rendimiento.', 2, 1),
+('Casco Poc Octal', 'Casco', 250.00, 10, 'Casco ultraligero con gran ventilación.', 23, 2),
+('Frenos SRAM Force', 'Frenos', 180.00, 20, 'Frenos hidráulicos para ruta.', 21, 1),
+('Pedales Shimano SPD', 'Pedales', 60.00, 35, 'Pedales automáticos para MTB.', 20, 3),
+('Luz Bontrager Ion Pro', 'Luces', 130.00, 25, 'Luz recargable de alta luminosidad.', 12, 4),
+('Aro Continental Race', 'Aros', 55.99, 30, 'Aro ligero para carreras.', 2, 1),
+('Casco Bontrager Starvos', 'Casco', 150.00, 20, 'Casco versátil para carretera.', 12, 2),
+('Frenos Campagnolo Record', 'Frenos', 200.00, 18, 'Frenos de alto rendimiento.', 2, 1),
+('Luz Lezyne Lite Drive 1000XL', 'Luces', 90.00, 60, 'Luz potente y compacta.', 6, 3),
+('Pedales Look Keo 2 Max', 'Pedales', 70.00, 25, 'Pedales para carretera.', 20, 1),
+('Rueda Mavic Ksyrium Elite', 'Rueda', 180.00, 12, 'Rueda ligera y resistente.', 2, 1),
 ('Casco Scott Arx', 'Casco', 100.00, 22, 'Casco cómodo y seguro.', 6, 2),
-('Frenos TRP Spyre', 'Frenos', 100.00, 28, 'Frenos mecánicos de disco.', 21, 1),
-('Pedales Time ATAC XC8', 'Pedales', 110.00, 14, 'Pedales para MTB.', 21, 3),
-('Rueda Zipp 303 Firecrest', 'Rueda', 1400.00, 8, 'Rueda de carbono aerodinámica.', 21, 1);
+('Frenos TRP Spyre', 'Frenos', 100.00, 28, 'Frenos mecánicos de disco.', 1, 1),
+('Pedales Time ATAC XC8', 'Pedales', 110.00, 14, 'Pedales para MTB.', 1, 3),
+('Rueda Zipp 303 Firecrest', 'Rueda', 1400.00, 8, 'Rueda de carbono aerodinámica.', 1, 1);
 
 

@@ -8,12 +8,17 @@ class Category(models.Model):
     def __str__(self):
         return self.category_name
     
-class Brand(models.Model):
-    brand_name = models.CharField(max_length=30, null=False, unique=True)
+class BrandBikes(models.Model):
+    brand_bike = models.CharField(max_length=30, null=False, unique=True)
     
     def __str__(self):
-        return self.brand_name
+        return self.brand_bike
 
+class BrandProducts(models.Model):
+    brand_product = models.CharField(max_length=30, null=False, unique=True)
+    
+    def __str__(self):
+        return self.brand_product
 
 class Bike(models.Model):
     model_name = models.CharField(max_length=50)
@@ -21,7 +26,7 @@ class Bike(models.Model):
                                 validators=[MinValueValidator(100.00, message="La Bicleta mas económica cuesta $100")]) 
     stock = models.PositiveIntegerField() 
     description = models.TextField(blank=True, null=True)
-    brand = models.ForeignKey(Brand, on_delete=models.CASCADE) 
+    brand = models.ForeignKey(BrandBikes, on_delete=models.CASCADE) 
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     bike_picture = models.ImageField(upload_to='bike_images', blank=True, null=True)
 
@@ -45,7 +50,7 @@ class Product(models.Model):
                                 validators=[MinValueValidator(0.99, message="El producto mas económico cuesta 0,99")]) 
     stock = models.PositiveIntegerField() 
     description = models.TextField(blank=True, null=True)
-    brand = models.ForeignKey(Brand, on_delete=models.CASCADE) 
+    brand = models.ForeignKey(BrandProducts, on_delete=models.CASCADE) 
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     product_picture = models.ImageField(upload_to='product_images', blank=True, null=True)
 
@@ -82,7 +87,7 @@ class PaymentType(models.Model):
         return self.pay_name
     
 
-class Shopping(models.Model):
+class Cart(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     date = models.DateField()
     country = models.CharField(max_length=30, null=False)
@@ -92,7 +97,7 @@ class Shopping(models.Model):
     paid = models.BooleanField(default=False)
        
     def __str__(self):
-        return f'Shopping {self.id} - Customer: {self.customer}'
+        return f'Compra {self.id} - Cliente: {self.customer}'
     
     def calculate_total(self):
         total = Decimal('0.00')
@@ -103,8 +108,8 @@ class Shopping(models.Model):
         return self.total
 
 
-class ShoppingItem(models.Model):
-    shopping = models.ForeignKey(Shopping, on_delete=models.CASCADE)
+class CartItem(models.Model):
+    shopping = models.ForeignKey(Cart, on_delete=models.CASCADE)
     bike = models.ForeignKey(Bike, on_delete=models.CASCADE, blank=True, null=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, blank=True, null=True)
     quantity = models.PositiveIntegerField(default=1)
