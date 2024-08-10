@@ -1,0 +1,170 @@
+SELECT * FROM city_cyclist_brand
+
+INSERT INTO city_cyclist_brand (brand_name) VALUES
+('Trek'),
+('Specialized'),
+('Giant'),
+('Cannondale'),
+('Bianchi'),
+('Scott'),
+('Pinarello'),
+('Cervélo'),
+('BMC'),
+('Merida'),
+('Colnago'),
+('Orbea'),
+('Santa Cruz'),
+('Fuji'),
+('Raleigh'),
+('Kona'),
+('Lapierre'),
+('Ridley'),
+('De Rosa'),
+('Salsa');
+
+SELECT * FROM city_cyclist_category
+
+INSERT INTO city_cyclist_category (category_name) VALUES
+('Ruta'),
+('Pista'),
+('Montaña (MTB)'),
+('Ciclocross'),
+('Ultra-endurance'),
+('Gravel'),
+('BMX'),
+('Trial'),
+('Rutas de Aventura'),
+('Fondo'),
+('Sprint'),
+('Escalada'),
+('Descenso'),
+('Contrarreloj'),
+('Carretera por Etapas'),
+('Resistencia'),
+('Velocidad en Pista'),
+('Rutas Urbanas'),
+('Juegos Olímpicos'),
+('Paraciclismo');
+
+SELECT * FROM city_cyclist_paymenttype
+
+INSERT INTO city_cyclist_paymenttype (pay_name) VALUES
+('Efectivo'),
+('Tarjeta de Crédito'),
+('Tarjeta de Débito'),
+('Transferencia Bancaria'),
+('Cheque'),
+('Pago Móvil'),
+('PayPal'),
+('Financiamiento a Plazos'),
+('Tarjetas de Regalo'),
+('Pago por Teléfono'),
+('Puntos de Venta'),
+('Recibo de Transferencia'),
+('Pago por Factura'),
+('Canje');
+
+SELECT * FROM city_cyclist_customer
+
+INSERT INTO city_cyclist_customer (name, last_name, id_card, email, phone_number, address) VALUES
+('Juan', 'Pérez', '1234567890', 'juan.perez@example.com', '1234567', 'Calle 1, No. 101'),
+('Ana', 'García', '2345678901', 'ana.garcia@example.com', '23456789', 'Calle 2, No. 202'),
+('Carlos', 'Rodríguez', '3456789012', 'carlos.rodriguez@example.com', '3456789012', 'Calle 3, No. 303'),
+('María', 'López', '4567890123', 'maria.lopez@example.com', '456789012', 'Calle 4, No. 404'),
+('Pedro', 'Martínez', '5678901234', 'pedro.martinez@example.com', '567890123', 'Calle 5, No. 505'),
+('Laura', 'Fernández', '6789012345', 'laura.fernandez@example.com', '678901234', 'Calle 6, No. 606'),
+('José', 'González', '7890123456', 'jose.gonzalez@example.com', '7890123456', 'Calle 7, No. 707'),
+('Isabel', 'Torres', '8901234567', 'isabel.torres@example.com', '890123456', 'Calle 8, No. 808'),
+('Miguel', 'Ángel', '9012345678', 'miguel.angel@example.com', '9012345678', 'Calle 9, No. 909'),
+('Patricia', 'Díaz', '0123456789', 'patricia.diaz@example.com', '012345678', 'Calle 10, No. 1010'),
+('Javier', 'Morales', '1234567891', 'javier.morales@example.com', '123456789', 'Calle 11, No. 1111'),
+('Carolina', 'Gómez', '2345678902', 'carolina.gomez@example.com', '234567890', 'Calle 12, No. 1212'),
+('Francisco', 'Ramírez', '3456789013', 'francisco.ramirez@example.com', '345678901', 'Calle 13, No. 1313'),
+('Andrea', 'Castro', '4567890124', 'andrea.castro@example.com', '456789012', 'Calle 14, No. 1414'),
+('Luis', 'Martínez', '5678901235', 'luis.martinez@example.com', '5678901234', 'Calle 15, No. 1515'),
+('Marta', 'Ruiz', '6789012346', 'marta.ruiz@example.com', '6789012345', 'Calle 16, No. 1616'),
+('Sergio', 'López', '7890123457', 'sergio.lopez@example.com', '7890123457', 'Calle 17, No. 1717'),
+('Valeria', 'Romero', '8901234568', 'valeria.romero@example.com', '8901234567', 'Calle 18, No. 1818'),
+('Ángel', 'Martínez', '9012345679', 'angel.martinez@example.com', '9012345679', 'Calle 19, No. 1919'),
+('Claudia', 'Vargas', '0123456790', 'claudia.vargas@example.com', '012345679', 'Calle 20, No. 2020');
+
+SELECT * FROM city_cyclist_bike
+
+-- Insertar datos en la tabla city_cyclist_bike
+INSERT INTO city_cyclist_bike (model_name, price, stock, description, brand_id, category_id) VALUES
+('Trek Domane SL 7', 5500.00, 10, 'Bicicleta de carretera de alto rendimiento.', 1, 15),
+('Specialized Roubaix Pro', 5000.00, 15, 'Bicicleta de carretera con tecnología de suspensión avanzada.', 2, 15),
+('Giant Defy Advanced 1', 4000.00, 20, 'Bicicleta de carretera para largas distancias.', 3, 15),
+('Cannondale Synapse Carbon', 3500.00, 25, 'Bicicleta de carretera con cuadro de carbono ligero.', 4, 15),
+('Bianchi Oltre XR4', 6000.00, 12, 'Bicicleta de carretera con aerodinámica avanzada.', 5, 15),
+('Scott Addict RC', 4500.00, 18, 'Bicicleta de carretera ligera y rápida.', 6, 15),
+('Pinarello Dogma F', 7500.00, 8, 'Bicicleta de carretera para profesionales.', 7, 15),
+('Cervélo R5', 7000.00, 10, 'Bicicleta de carretera para carreras y entrenamiento.', 8, 15),
+('BMC Teammachine SLR01', 7200.00, 5, 'Bicicleta de carretera con tecnología de suspensión avanzada.', 9, 15),
+('Merida Reacto 9000', 4000.00, 22, 'Bicicleta de carretera aerodinámica.', 10, 15),
+('Colnago C64', 7500.00, 7, 'Bicicleta de carretera de gama alta con cuadro de carbono.', 11, 15),
+('Orbea Orca OMX', 6500.00, 11, 'Bicicleta de carretera con cuadro de carbono ligero.', 12, 15),
+('Santa Cruz Hightower', 6000.00, 9, 'Bicicleta de montaña con suspensión de alta gama.', 13, 3),
+('Fuji Altamira', 3500.00, 20, 'Bicicleta de carretera para entrenamiento y competición.', 14, 15),
+('Raleigh Revenio Carbon', 3000.00, 30, 'Bicicleta de carretera con cuadro de carbono.', 15, 15),
+('Kona Process 153', 3500.00, 15, 'Bicicleta de montaña para trail y enduro.', 16, 3),
+('Lapierre Xelius SL', 4500.00, 14, 'Bicicleta de carretera ligera para competición.', 17, 15),
+('Ridley Helium SL', 5000.00, 13, 'Bicicleta de carretera con cuadro ultraligero.', 18, 15),
+('De Rosa King XS', 6000.00, 8, 'Bicicleta de carretera con alta tecnología y rendimiento.', 19, 15),
+('Salsa Warbird', 3500.00, 17, 'Bicicleta de gravel para aventuras en terrenos mixtos.', 20, 6);
+
+
+
+SELECT * FROM city_cyclist_brand
+
+INSERT INTO city_cyclist_brand (brand_name) VALUES
+('Schwalbe'),
+('Continental'),
+('Michelin'),
+('Kenda'),
+('Topeak'),
+('Lezyne'),
+('Crankbrothers'),
+('Park Tool'),
+('Muc-Off'),
+('Finish Line'),
+('Cateye'),
+('Bontrager'),
+('Kryptonite'),
+('Ortlieb'),
+('Selle Italia'),
+('Brooks'),
+('Fizik'),
+('Lizard Skins'),
+('Axiom'),
+('Shimano'),
+('SRAM'),
+('Giro'),
+('Poc');
+
+
+SELECT * FROM city_cyclist_product
+
+INSERT INTO city_cyclist_product (product_name, product_category, price, stock, description, brand_id, category_id) VALUES
+('Aro Schwalbe 700x25', 'Aros', 50.99, 20, 'Aro de alta calidad para bicicletas de ruta.', 21, 1),
+('Casco Giro Synthe', 'Casco', 220.00, 15, 'Casco aerodinámico y ligero.', 42, 2),
+('Frenos Shimano Ultegra', 'Frenos', 150.00, 30, 'Frenos de alto rendimiento.', 40, 1),
+('Luz Cateye Volt 1600', 'Luces', 120.00, 50, 'Luz delantera potente para ciclismo.', 31, 3),
+('Pedales Crankbrothers Egg', 'Pedales', 85.00, 40, 'Pedales ligeros y resistentes.', 27, 4),
+('Rueda Continental GP 5000', 'Rueda', 75.99, 25, 'Rueda de alto rendimiento.', 22, 1),
+('Casco Poc Octal', 'Casco', 250.00, 10, 'Casco ultraligero con gran ventilación.', 43, 2),
+('Frenos SRAM Force', 'Frenos', 180.00, 20, 'Frenos hidráulicos para ruta.', 41, 1),
+('Pedales Shimano SPD', 'Pedales', 60.00, 35, 'Pedales automáticos para MTB.', 40, 3),
+('Luz Bontrager Ion Pro', 'Luces', 130.00, 25, 'Luz recargable de alta luminosidad.', 32, 4),
+('Aro Continental Race', 'Aros', 55.99, 30, 'Aro ligero para carreras.', 22, 1),
+('Casco Bontrager Starvos', 'Casco', 150.00, 20, 'Casco versátil para carretera.', 32, 2),
+('Frenos Campagnolo Record', 'Frenos', 200.00, 18, 'Frenos de alto rendimiento.', 22, 1),
+('Luz Lezyne Lite Drive 1000XL', 'Luces', 90.00, 60, 'Luz potente y compacta.', 26, 3),
+('Pedales Look Keo 2 Max', 'Pedales', 70.00, 25, 'Pedales para carretera.', 40, 1),
+('Rueda Mavic Ksyrium Elite', 'Rueda', 180.00, 12, 'Rueda ligera y resistente.', 22, 1),
+('Casco Scott Arx', 'Casco', 100.00, 22, 'Casco cómodo y seguro.', 6, 2),
+('Frenos TRP Spyre', 'Frenos', 100.00, 28, 'Frenos mecánicos de disco.', 21, 1),
+('Pedales Time ATAC XC8', 'Pedales', 110.00, 14, 'Pedales para MTB.', 21, 3),
+('Rueda Zipp 303 Firecrest', 'Rueda', 1400.00, 8, 'Rueda de carbono aerodinámica.', 21, 1);
+
+
