@@ -9,18 +9,17 @@ class Category(models.Model):
     
 class Brand(models.Model):
     brand_name = models.CharField(max_length=30, null=False, unique=True)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-
+    
     def __str__(self):
         return self.brand_name
 
 
 class Bike(models.Model):
     model_name = models.CharField(max_length=50)
-    brand = models.ForeignKey(Brand, on_delete=models.CASCADE) 
     price = models.DecimalField(max_digits=10, decimal_places=2) 
     stock = models.PositiveIntegerField() 
     description = models.TextField(blank=True, null=True)
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE) 
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     bike_picture = models.ImageField(upload_to='bike_images', blank=True, null=True)  
     
@@ -39,10 +38,12 @@ class Product(models.Model):
         ("Rueda", "Rueda")
     }
     product_category = models.CharField(max_length=30, choices=PRODUCT_CATEGORY, null=False)
-    price = models.DecimalField(max_digits=10, decimal_places=2)  
+    price = models.DecimalField(max_digits=10, decimal_places=2) 
+    stock = models.PositiveIntegerField() 
     description = models.TextField(blank=True, null=True)
-    stock = models.PositiveIntegerField()
-    product_picture = models.ImageField(upload_to='product_images', blank=True, null=True) 
+    brand = models.ForeignKey(Brand, on_delete=models.CASCADE) 
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    product_picture = models.ImageField(upload_to='product_images', blank=True, null=True)
 
     def __str__(self):
         return self.product_name
@@ -69,6 +70,8 @@ class PaymentType(models.Model):
 
     def __str__(self):
         return self.pay_name
+    
+
 
 class Shopping(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
@@ -81,3 +84,4 @@ class Shopping(models.Model):
        
     def __str__(self):
         return f'Shopping {self.id} - Customer: {self.customer}'
+    
