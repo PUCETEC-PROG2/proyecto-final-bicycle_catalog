@@ -1,5 +1,5 @@
 from django import forms
-from .models import Category, Brand, Bike, Product, Customer, PaymentType, Shopping
+from .models import Category, Brand, Bike, Product, Customer, PaymentType, Shopping, ShoppingItem
 
 class CategoryForm(forms.ModelForm):
     class Meta:
@@ -66,16 +66,29 @@ class PaymentTypeForm(forms.ModelForm):
             'pay_name': forms.TextInput(attrs={'class': 'form-control'}),
         }
 
+class ShoppingItemForm(forms.ModelForm):
+    class Meta:
+        model = ShoppingItem
+        fields = ['bike', 'product', 'quantity']
+        widgets = {
+            'bike': forms.Select(attrs={'class': 'form-control'}),
+            'product': forms.Select(attrs={'class': 'form-control'}),
+            'quantity': forms.NumberInput(attrs={'class': 'form-control'}),
+        }
+
 class ShoppingForm(forms.ModelForm):
     class Meta:
         model = Shopping
-        fields = '__all__'
+        fields = ['customer', 'date', 'country', 'city', 'payment_type', 'total']
         widgets = {
             'customer': forms.Select(attrs={'class': 'form-control'}),
-            'date': forms.DateInput(attrs={'class': 'form-control'}),
-            'bike': forms.SelectMultiple(attrs={'class': 'form-control'}),
-            'products': forms.SelectMultiple(attrs={'class': 'form-control'}),
+            'date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
+            'country': forms.TextInput(attrs={'class': 'form-control'}),
+            'city': forms.TextInput(attrs={'class': 'form-control'}),
             'payment_type': forms.Select(attrs={'class': 'form-control'}),
-            'total': forms.NumberInput(attrs={'class': 'form-control'}),
-            
+            'total': forms.NumberInput(attrs={'class': 'form-control', 'readonly': 'readonly'}),
         }
+
+    shopping_items = forms.inlineformset_factory(
+        Shopping, ShoppingItem, form=ShoppingItemForm, extra=1, can_delete=True
+    )

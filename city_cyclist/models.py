@@ -1,6 +1,6 @@
 from django.db import models
-from django.core.exceptions import ValidationError
-from django.core.validators import MinValueValidator, MaxValueValidator, RegexValidator
+from django.core.validators import MinValueValidator, RegexValidator
+from decimal import Decimal
 
 class Category(models.Model):
     category_name = models.CharField(max_length=30, null=False, unique=True)
@@ -87,16 +87,36 @@ class Shopping(models.Model):
     date = models.DateField()
     country = models.CharField(max_length=30, null=False)
     city = models.CharField(max_length=30, null=False)
-    bike = models.ManyToManyField(Bike, blank=True)
-    products = models.ManyToManyField(Product, blank=True) 
     payment_type = models.ForeignKey(PaymentType, on_delete=models.RESTRICT)
     total = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    paid = models.BooleanField(default=False)
        
     def __str__(self):
         return f'Shopping {self.id} - Customer: {self.customer}'
     
-
     def calculate_total(self):
-        total_bikes = self.bike.aggregate(total=models.Sum('price'))['total'] or 0
-        total_products = self.products.aggregate(total=models.Sum('price'))['total'] or 0
-        return total_bikes + total_products
+        total = Decimal('0.00')
+        for item in self.shoppingitem_set.all():
+            total += item.subtotal()
+        self.total = total
+        self.save()
+        return self.total
+
+
+class ShoppingItem(models.Model):
+    shopping = models.ForeignKey(Shopping, on_delete=models.CASCADE)
+    bike = models.ForeignKey(Bike, on_delete=models.CASCADE, blank=True, null=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, blank=True, null=True)
+    quantity = models.PositiveIntegerField(default=1)
+
+    def subtotal(self):
+        if self.bike:
+            return self.quantity * self.bike.price
+        elif self.product:
+            return self.quantity * self.product.price
+        return Decimal('0.00')
+
+    def __str__(self):
+        item_name = self.bike.model_name if self.bike else self.product.product_name
+        item_price = self.bike.price if self.bike else self.product.price
+        return f'{item_name} - Cantidad: {self.quantity} - Precio unitario: {item_price} - Subtotal: {self.subtotal()}'
