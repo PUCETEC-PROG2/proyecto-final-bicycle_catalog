@@ -111,27 +111,39 @@ class Cart(models.Model):
 class CartItem(models.Model):
     shopping = models.ForeignKey(Cart, on_delete=models.CASCADE)
     bike = models.ForeignKey(Bike, on_delete=models.CASCADE, blank=True, null=True)
+    bicycle_numbers = models.PositiveIntegerField(default=1)
     accessories = models.ForeignKey(Accessories, on_delete=models.CASCADE, blank=True, null=True)
-    quantity = models.PositiveIntegerField(default=1)
+    accessorie_numbers = models.PositiveIntegerField(default=1)
 
     def subtotal(self):
+        total = Decimal('0.00')
+        
         if self.bike:
-            return self.quantity * self.bike.price
-        elif self.accessories:
-            return self.quantity * self.accessories.price
-        return Decimal('0.00')
+            total += self.bicycle_numbers * self.bike.price
+        
+        if self.accessories:
+            total += self.accessorie_numbers * self.accessories.price
+        
+        return total
 
     def __str__(self):
+        details = []
+
         if self.bike:
-            item_name = self.bike.bike_name
-            item_price = self.bike.price
-        elif self.accessories:
-            item_name = self.accessories.name_accessories
-            item_price = self.accessories.price
-        else:
-            item_name = 'Unknown'
-            item_price = Decimal('0.00')
-            
+            details.append(
+                f'Bicicleta: {self.bike.bike_name} - Cantidad: {self.bicycle_numbers} - Precio unitario: {self.bike.price}'
+            )
+        
+        if self.accessories:
+            details.append(
+                f'Accesorio: {self.accessories.name_accessories} - Cantidad: {self.accessorie_numbers} - Precio unitario: {self.accessories.price}'
+            )
+
+        if not details:
+            details.append('Unknown Item')
+
         customer_name = self.shopping.customer.name if self.shopping and self.shopping.customer else 'Unknown Customer'
         customer_lastname = self.shopping.customer.last_name if self.shopping and self.shopping.customer else 'Unknown Lastname'
-        return f'{customer_name} {customer_lastname} - {item_name} - Cantidad: {self.quantity} - Precio unitario: {item_price} - Subtotal: {self.subtotal()}'
+
+        details_str = ' | '.join(details)
+        return f'{customer_name} {customer_lastname} - {details_str} - Subtotal: {self.subtotal()}'
