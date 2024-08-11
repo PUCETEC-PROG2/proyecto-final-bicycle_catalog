@@ -26,8 +26,8 @@ class Bike(models.Model):
                                 validators=[MinValueValidator(100.00, message="La bicicleta más económica cuesta $100")]) 
     stock = models.PositiveIntegerField() 
     description = models.TextField(blank=True, null=True)
-    brands = models.ManyToManyField(BrandBikes)  # Relación de muchos a muchos con las marcas
-    categories = models.ManyToManyField(Category)  # Relación de muchos a muchos con las categorías
+    brands = models.ManyToManyField(BrandBikes)  
+    categories = models.ManyToManyField(Category)  
     bike_picture = models.ImageField(upload_to='bike_images', blank=True, null=True)
 
     def __str__(self):
@@ -50,8 +50,8 @@ class Accessories(models.Model):
                                 validators=[MinValueValidator(0.99, message="El producto más económico cuesta 0,99")]) 
     stock = models.PositiveIntegerField() 
     description = models.TextField(blank=True, null=True)
-    brands = models.ManyToManyField(BrandAccessories)  # Relación de muchos a muchos con las marcas
-    categories = models.ManyToManyField(Category)  # Relación de muchos a muchos con las categorías
+    brands = models.ManyToManyField(BrandAccessories)  
+    categories = models.ManyToManyField(Category)  
     product_picture = models.ImageField(upload_to='product_images', blank=True, null=True)
 
     def __str__(self):

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Category, Brand, Bike, Product, Customer, PaymentType, Shopping, ShoppingItem
+from .models import Category, BrandBikes, BrandAccessories, Bike, Accessories, Customer, PaymentType, CartItem
 
 class CategoryForm(forms.ModelForm):
     class Meta:
@@ -9,13 +9,20 @@ class CategoryForm(forms.ModelForm):
             'category_name': forms.TextInput(attrs={'class': 'form-control'}),
         }
 
-class BrandForm(forms.ModelForm):
+class BrandBikesForm(forms.ModelForm):
     class Meta:
-        model = Brand
+        model = BrandBikes
         fields = '__all__'
         widgets = {
-            'brand_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'category': forms.Select(attrs={'class': 'form-control'}),
+            'brand_bike': forms.TextInput(attrs={'class': 'form-control'}),
+        }
+
+class BrandAccessoriesForm(forms.ModelForm):
+    class Meta:
+        model = BrandAccessories
+        fields = '__all__'
+        widgets = {
+            'brand_product': forms.TextInput(attrs={'class': 'form-control'}),
         }
 
 class BikeForm(forms.ModelForm):
@@ -23,25 +30,23 @@ class BikeForm(forms.ModelForm):
         model = Bike
         fields = '__all__'
         widgets = {
-            'model_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'brand': forms.Select(attrs={'class': 'form-control'}),
+            'bike_name': forms.TextInput(attrs={'class': 'form-control'}),
             'price': forms.NumberInput(attrs={'class': 'form-control'}),
             'stock': forms.NumberInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control'}),
-            'category': forms.Select(attrs={'class': 'form-control'}),
             'bike_picture': forms.ClearableFileInput(attrs={'class': 'form-control'}),
         }
 
-class ProductForm(forms.ModelForm):
+class AccessoriesForm(forms.ModelForm):
     class Meta:
-        model = Product
+        model = Accessories
         fields = '__all__'
         widgets = {
-            'product_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'name_accessories': forms.TextInput(attrs={'class': 'form-control'}),
             'product_category': forms.Select(attrs={'class': 'form-control'}),
             'price': forms.NumberInput(attrs={'class': 'form-control'}),
-            'description': forms.Textarea(attrs={'class': 'form-control'}),
             'stock': forms.NumberInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control'}),
             'product_picture': forms.ClearableFileInput(attrs={'class': 'form-control'}),
         }
 
@@ -66,29 +71,18 @@ class PaymentTypeForm(forms.ModelForm):
             'pay_name': forms.TextInput(attrs={'class': 'form-control'}),
         }
 
-class ShoppingItemForm(forms.ModelForm):
+class CartItemForm(forms.ModelForm):
     class Meta:
-        model = ShoppingItem
-        fields = ['bike', 'product', 'quantity']
-        widgets = {
-            'bike': forms.Select(attrs={'class': 'form-control'}),
-            'product': forms.Select(attrs={'class': 'form-control'}),
-            'quantity': forms.NumberInput(attrs={'class': 'form-control'}),
-        }
-
-class ShoppingForm(forms.ModelForm):
-    class Meta:
-        model = Shopping
-        fields = ['customer', 'date', 'country', 'city', 'payment_type', 'total']
+        model = CartItem
+        fields = ['customer', 'date', 'country', 'city', 'payment_type', 'bike', 'bicycle_numbers', 'accessories', 'accessorie_numbers']
         widgets = {
             'customer': forms.Select(attrs={'class': 'form-control'}),
             'date': forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}),
             'country': forms.TextInput(attrs={'class': 'form-control'}),
             'city': forms.TextInput(attrs={'class': 'form-control'}),
             'payment_type': forms.Select(attrs={'class': 'form-control'}),
-            'total': forms.NumberInput(attrs={'class': 'form-control', 'readonly': 'readonly'}),
+            'bike': forms.Select(attrs={'class': 'form-control'}),
+            'bicycle_numbers': forms.NumberInput(attrs={'class': 'form-control'}),
+            'accessories': forms.Select(attrs={'class': 'form-control'}),
+            'accessorie_numbers': forms.NumberInput(attrs={'class': 'form-control'}),
         }
-
-    shopping_items = forms.inlineformset_factory(
-        Shopping, ShoppingItem, form=ShoppingItemForm, extra=1, can_delete=True
-    )
