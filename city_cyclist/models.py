@@ -23,45 +23,46 @@ class BrandAccessories(models.Model):
 class Bike(models.Model):
     bike_name = models.CharField(max_length=50)
     price = models.DecimalField(max_digits=10, decimal_places=2, 
-                                validators=[MinValueValidator(100.00, message="La Bicleta mas económica cuesta $100")]) 
+                                validators=[MinValueValidator(100.00, message="La bicicleta más económica cuesta $100")]) 
     stock = models.PositiveIntegerField() 
     description = models.TextField(blank=True, null=True)
-    brand = models.ForeignKey(BrandBikes, on_delete=models.CASCADE) 
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    brands = models.ManyToManyField(BrandBikes)  # Relación de muchos a muchos con las marcas
+    categories = models.ManyToManyField(Category)  # Relación de muchos a muchos con las categorías
     bike_picture = models.ImageField(upload_to='bike_images', blank=True, null=True)
 
-    
     def __str__(self):
-        return f'{self.bike_name} - {self.brand} - {self.category}'
-
+        brands = ", ".join([str(brand) for brand in self.brands.all()])
+        categories = ", ".join([str(category) for category in self.categories.all()])
+        return f'{self.bike_name} - {brands} - {categories}'
 
 class Accessories(models.Model):
     name_accessories = models.CharField(max_length=30, unique=True)
-    PRODUCT_CATEGORY= {
+    PRODUCT_CATEGORY = [
         ("Aros", "Aros"),
         ("Casco", "Casco"),
         ("Frenos", "Frenos"),
-        ("Luces","Luces"),
+        ("Luces", "Luces"),
         ("Pedales", "Pedales"),
         ("Rueda", "Rueda")
-    }
+    ]
     product_category = models.CharField(max_length=30, choices=PRODUCT_CATEGORY, null=False)
     price = models.DecimalField(max_digits=10, decimal_places=2,
-                                validators=[MinValueValidator(0.99, message="El producto mas económico cuesta 0,99")]) 
+                                validators=[MinValueValidator(0.99, message="El producto más económico cuesta 0,99")]) 
     stock = models.PositiveIntegerField() 
     description = models.TextField(blank=True, null=True)
-    brand = models.ForeignKey(BrandAccessories, on_delete=models.CASCADE) 
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    brands = models.ManyToManyField(BrandAccessories)  # Relación de muchos a muchos con las marcas
+    categories = models.ManyToManyField(Category)  # Relación de muchos a muchos con las categorías
     product_picture = models.ImageField(upload_to='product_images', blank=True, null=True)
 
     def __str__(self):
-       return f'{self.name_accessories} - {self.brand} - {self.category}'
-
+        brands = ", ".join([str(brand) for brand in self.brands.all()])
+        categories = ", ".join([str(category) for category in self.categories.all()])
+        return f'{self.name_accessories} - {brands} - {categories}'
 
 class Customer(models.Model):
     name = models.CharField(max_length=30, null=False)
     last_name = models.CharField(max_length=30, null=False)
-    id_card = models.CharField(unique=True,validators=[
+    id_card = models.CharField(unique=True, validators=[
                                         RegexValidator(
                                             regex=r'^\d{10}$',
                                             message='El número de cédula debe tener 10 dígitos.'
@@ -78,7 +79,6 @@ class Customer(models.Model):
 
     def __str__(self):
         return f'{self.name} {self.last_name}'
-
 
 class PaymentType(models.Model):
     pay_name = models.CharField(max_length=30, null=False, unique=True)
