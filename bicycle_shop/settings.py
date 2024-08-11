@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'bicycle_shop.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mxz',
+        'NAME': 'mxzn',
         'HOST': 'localhost',
         'PORT': '5432',
         'USER': 'stalin',

@@ -86,30 +86,12 @@ class PaymentType(models.Model):
     def __str__(self):
         return self.pay_name
     
-
-class Cart(models.Model):
+class CartItem(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     date = models.DateField()
     country = models.CharField(max_length=30, null=False)
     city = models.CharField(max_length=30, null=False)
     payment_type = models.ForeignKey(PaymentType, on_delete=models.RESTRICT)
-    total = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
-    paid = models.BooleanField(default=False)
-       
-    def __str__(self):
-        return f'Compra {self.id} - Cliente: {self.customer}'
-    
-    def calculate_total(self):
-        total = Decimal('0.00')
-        for item in self.shoppingitem_set.all():
-            total += item.subtotal()
-        self.total = total
-        self.save()
-        return self.total
-
-
-class CartItem(models.Model):
-    shopping = models.ForeignKey(Cart, on_delete=models.CASCADE)
     bike = models.ForeignKey(Bike, on_delete=models.CASCADE, blank=True, null=True)
     bicycle_numbers = models.PositiveIntegerField(default=1)
     accessories = models.ForeignKey(Accessories, on_delete=models.CASCADE, blank=True, null=True)
@@ -142,8 +124,8 @@ class CartItem(models.Model):
         if not details:
             details.append('Unknown Item')
 
-        customer_name = self.shopping.customer.name if self.shopping and self.shopping.customer else 'Unknown Customer'
-        customer_lastname = self.shopping.customer.last_name if self.shopping and self.shopping.customer else 'Unknown Lastname'
+        customer_name = self.customer.name if self.customer else 'Unknown Customer'
+        customer_lastname = self.customer.last_name if self.customer else 'Unknown Lastname'
 
         details_str = ' | '.join(details)
         return f'{customer_name} {customer_lastname} - {details_str} - Subtotal: {self.subtotal()}'

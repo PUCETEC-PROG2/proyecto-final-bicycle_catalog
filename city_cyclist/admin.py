@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Bike, Accessories, Customer, PaymentType, Cart, BrandBikes, CartItem, BrandAccessories
+from .models import Category, Bike, Accessories, Customer, PaymentType, BrandBikes, CartItem, BrandAccessories
 
 
 @admin.register(Category)
@@ -22,11 +22,7 @@ class CustomerAdmin(admin.ModelAdmin):
 @admin.register(PaymentType)
 class PaymentTypeAdmin(admin.ModelAdmin):
     pass
-
-@admin.register(Cart)
-class ShoppingAdmin(admin.ModelAdmin):
-    def no_delete(self, request, obj=None):
-        return False         
+        
 
 @admin.register(BrandBikes)
 class BrandBikesAdmin(admin.ModelAdmin):
