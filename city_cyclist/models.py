@@ -126,7 +126,7 @@ class CartItem(models.Model):
             item_name = self.bike.bike_name
             item_price = self.bike.price
         elif self.accessories:
-            item_name = self.accessories.name
+            item_name = self.accessories.name_accessories
             item_price = self.accessories.price
         else:
             item_name = 'Unknown'
