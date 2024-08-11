@@ -122,6 +122,16 @@ class CartItem(models.Model):
         return Decimal('0.00')
 
     def __str__(self):
-        item_name = self.bike.model_name if self.bike else self.accessories.price
-        item_price = self.bike.price if self.bike else self.accessories.price
-        return f'{item_name} - Cantidad: {self.quantity} - Precio unitario: {item_price} - Subtotal: {self.subtotal()}'
+        if self.bike:
+            item_name = self.bike.bike_name
+            item_price = self.bike.price
+        elif self.accessories:
+            item_name = self.accessories.name
+            item_price = self.accessories.price
+        else:
+            item_name = 'Unknown'
+            item_price = Decimal('0.00')
+            
+        customer_name = self.shopping.customer.name if self.shopping and self.shopping.customer else 'Unknown Customer'
+        customer_lastname = self.shopping.customer.last_name if self.shopping and self.shopping.customer else 'Unknown Lastname'
+        return f'{customer_name} {customer_lastname} - {item_name} - Cantidad: {self.quantity} - Precio unitario: {item_price} - Subtotal: {self.subtotal()}'
