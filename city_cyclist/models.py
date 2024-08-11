@@ -14,7 +14,7 @@ class BrandBikes(models.Model):
     def __str__(self):
         return self.brand_bike
 
-class BrandProducts(models.Model):
+class BrandAccessories(models.Model):
     brand_product = models.CharField(max_length=30, null=False, unique=True)
     
     def __str__(self):
@@ -35,8 +35,8 @@ class Bike(models.Model):
         return f'{self.model_name} - {self.brand} - {self.category}'
 
 
-class Product(models.Model):
-    product_name = models.CharField(max_length=30, unique=True)
+class Accessories(models.Model):
+    product_accessories = models.CharField(max_length=30, unique=True)
     PRODUCT_CATEGORY= {
         ("Aros", "Aros"),
         ("Casco", "Casco"),
@@ -50,7 +50,7 @@ class Product(models.Model):
                                 validators=[MinValueValidator(0.99, message="El producto mas económico cuesta 0,99")]) 
     stock = models.PositiveIntegerField() 
     description = models.TextField(blank=True, null=True)
-    brand = models.ForeignKey(BrandProducts, on_delete=models.CASCADE) 
+    brand = models.ForeignKey(BrandAccessories, on_delete=models.CASCADE) 
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     product_picture = models.ImageField(upload_to='product_images', blank=True, null=True)
 
@@ -111,17 +111,17 @@ class Cart(models.Model):
 class CartItem(models.Model):
     shopping = models.ForeignKey(Cart, on_delete=models.CASCADE)
     bike = models.ForeignKey(Bike, on_delete=models.CASCADE, blank=True, null=True)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, blank=True, null=True)
+    accessories = models.ForeignKey(Accessories, on_delete=models.CASCADE, blank=True, null=True)
     quantity = models.PositiveIntegerField(default=1)
 
     def subtotal(self):
         if self.bike:
             return self.quantity * self.bike.price
-        elif self.product:
-            return self.quantity * self.product.price
+        elif self.accessories:
+            return self.quantity * self.accessories.price
         return Decimal('0.00')
 
     def __str__(self):
-        item_name = self.bike.model_name if self.bike else self.product.product_name
-        item_price = self.bike.price if self.bike else self.product.price
+        item_name = self.bike.model_name if self.bike else self.accessories.price
+        item_price = self.bike.price if self.bike else self.accessories.price
         return f'{item_name} - Cantidad: {self.quantity} - Precio unitario: {item_price} - Subtotal: {self.subtotal()}'

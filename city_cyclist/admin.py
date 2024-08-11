@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Bike, Product, Customer, PaymentType, Cart, BrandBikes, CartItem, BrandProducts
+from .models import Category, Bike, Accessories, Customer, PaymentType, Cart, BrandBikes, CartItem, BrandAccessories
 
 
 @admin.register(Category)
@@ -11,7 +11,7 @@ class CategoryAdmin(admin.ModelAdmin):
 class BikeAdmin(admin.ModelAdmin):
     pass
 
-@admin.register(Product)
+@admin.register(Accessories)
 class ProductAdmin(admin.ModelAdmin):
     pass
 
@@ -32,7 +32,7 @@ class ShoppingAdmin(admin.ModelAdmin):
 class BrandBikesAdmin(admin.ModelAdmin):
     pass
 
-@admin.register(BrandProducts)
+@admin.register(BrandAccessories)
 class BrandProductsAdmin(admin.ModelAdmin):
     pass
 
