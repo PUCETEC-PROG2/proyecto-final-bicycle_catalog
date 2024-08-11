@@ -22,9 +22,9 @@ INSERT INTO city_cyclist_brandbikes (brand_bike) VALUES
 ('De Rosa'),
 ('Salsa');
 
-SELECT * FROM city_cyclist_brandproducts
+SELECT * FROM city_cyclist_brandaccessories
 
-INSERT INTO city_cyclist_brandproducts (brand_product) VALUES
+INSERT INTO city_cyclist_brandaccessories (brand_product) VALUES
 ('Schwalbe'),
 ('Continental'),
 ('Michelin'),
@@ -145,11 +145,11 @@ INSERT INTO city_cyclist_bike (model_name, price, stock, description, brand_id, 
 
 
 
-SELECT * FROM city_cyclist_product
+SELECT * FROM city_cyclist_accessories
 
 
-INSERT INTO city_cyclist_product (product_name, product_category, price, stock, description, brand_id, category_id) VALUES
-('Aro Schwalbe 700x25', 'Aros', 50.99, 20, 'Aro de alta calidad para bicicletas de ruta.', 1, 1),
+INSERT INTO city_cyclist_accessories (product_accessories,product_category, price, stock, description, brand_id, category_id) VALUES
+('Aro Schwalbe 700x25', 'Aros', 50.99, 20, 'Aro de alta calidad.', 1, 1),
 ('Casco Giro Synthe', 'Casco', 220.00, 15, 'Casco aerodinámico y ligero.', 22, 2),
 ('Frenos Shimano Ultegra', 'Frenos', 150.00, 30, 'Frenos de alto rendimiento.', 20, 1),
 ('Luz Cateye Volt 1600', 'Luces', 120.00, 50, 'Luz delantera potente para ciclismo.', 11, 3),
