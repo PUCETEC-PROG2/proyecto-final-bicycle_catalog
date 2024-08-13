@@ -120,7 +120,7 @@ SELECT * FROM city_cyclist_bike
 
 -- Insertar datos en la tabla city_cyclist_bike
 
-INSERT INTO city_cyclist_bike (bike_name, price, stock, description, brand_bikes_id) VALUES
+INSERT INTO city_cyclist_bike (name, price, stock, description, brand_bikes_id) VALUES
 ('Trek Domane SL 7', 5500.00, 10, 'Bicicleta de carretera de alto rendimiento.', 1),
 ('Specialized Roubaix Pro', 5000.00, 15, 'Bicicleta de carretera con tecnología de suspensión avanzada.', 2),
 ('Giant Defy Advanced 1', 4000.00, 20, 'Bicicleta de carretera para largas distancias.', 3),
@@ -147,27 +147,27 @@ INSERT INTO city_cyclist_bike (bike_name, price, stock, description, brand_bikes
 SELECT * FROM city_cyclist_accessories
 
 -- Insertar datos en la tabla city_cyclist_accessories incluyendo el brand_id
-INSERT INTO city_cyclist_accessories (name_accessories, product_category, price, stock, description, brand_accesories_id) VALUES
-('Aro Schwalbe 700x25', 'Aros', 50.99, 20, 'Aro de alta calidad.', 1), -- Schwalbe
-('Casco Giro Synthe', 'Casco', 220.00, 15, 'Casco aerodinámico y ligero.', 21), -- Giro
-('Frenos Shimano Ultegra', 'Frenos', 150.00, 30, 'Frenos de alto rendimiento.', 20), -- Shimano
-('Luz Cateye Volt 1600', 'Luces', 120.00, 50, 'Luz delantera potente para ciclismo.', 11), -- Cateye
-('Pedales Crankbrothers Egg', 'Pedales', 85.00, 40, 'Pedales ligeros y resistentes.', 7), -- Crankbrothers
-('Rueda Continental GP 5000', 'Rueda', 75.99, 25, 'Rueda de alto rendimiento.', 2), -- Continental
-('Casco Poc Octal', 'Casco', 250.00, 10, 'Casco ultraligero con gran ventilación.', 22), -- Poc
-('Frenos SRAM Force', 'Frenos', 180.00, 20, 'Frenos hidráulicos para ruta.', 21), -- SRAM
-('Pedales Shimano SPD', 'Pedales', 60.00, 35, 'Pedales automáticos para MTB.', 20), -- Shimano
-('Luz Bontrager Ion Pro', 'Luces', 130.00, 25, 'Luz recargable de alta luminosidad.', 12), -- Bontrager
-('Aro Continental Race', 'Aros', 55.99, 30, 'Aro ligero para carreras.', 2), -- Continental
-('Casco Bontrager Starvos', 'Casco', 150.00, 20, 'Casco versátil para carretera.', 12), -- Bontrager
-('Frenos Campagnolo Record', 'Frenos', 200.00, 18, 'Frenos de alto rendimiento.', 20), -- Shimano (Asumiendo que Campagnolo está relacionado con Shimano)
-('Luz Lezyne Lite Drive 1000XL', 'Luces', 90.00, 60, 'Luz potente y compacta.', 6), -- Lezyne
-('Pedales Look Keo 2 Max', 'Pedales', 70.00, 25, 'Pedales para carretera.', 20), -- Shimano (Asumiendo Look está relacionado con Shimano)
-('Rueda Mavic Ksyrium Elite', 'Rueda', 180.00, 12, 'Rueda ligera y resistente.', 2), -- Continental (Asumiendo Mavic está relacionado con Continental)
-('Casco Scott Arx', 'Casco', 100.00, 22, 'Casco cómodo y seguro.', 21), -- Giro (Asumiendo Scott está relacionado con Giro)
-('Frenos TRP Spyre', 'Frenos', 100.00, 28, 'Frenos mecánicos de disco.', 20), -- Shimano
-('Pedales Time ATAC XC8', 'Pedales', 110.00, 14, 'Pedales para MTB.', 20), -- Shimano
-('Rueda Zipp 303 Firecrest', 'Rueda', 1400.00, 8, 'Rueda de carbono aerodinámica.', 2); -- Continental
+INSERT INTO city_cyclist_accessories (name, price, stock, description, product_category, brand_accesories_id) VALUES
+('Aro Schwalbe 700x25', 50.99, 20, 'Aro de alta calidad.', 'Aros', 1), -- Schwalbe
+('Casco Giro Synthe', 220.00, 15, 'Casco aerodinámico y ligero.', 'Casco', 21), -- Giro
+('Frenos Shimano Ultegra', 150.00, 30, 'Frenos de alto rendimiento.', 'Frenos', 20), -- Shimano
+('Luz Cateye Volt 1600', 120.00, 50, 'Luz delantera potente para ciclismo.', 'Luces', 11), -- Cateye
+('Pedales Crankbrothers Egg', 85.00, 40, 'Pedales ligeros y resistentes.', 'Pedales', 7), -- Crankbrothers
+('Rueda Continental GP 5000', 75.99, 25, 'Rueda de alto rendimiento.', 'Rueda', 2), -- Continental
+('Casco Poc Octal', 250.00, 10, 'Casco ultraligero con gran ventilación.', 'Casco', 22), -- Poc
+('Frenos SRAM Force', 180.00, 20, 'Frenos hidráulicos para ruta.', 'Frenos', 21), -- SRAM
+('Pedales Shimano SPD', 60.00, 35, 'Pedales automáticos para MTB.', 'Pedales', 20), -- Shimano
+('Luz Bontrager Ion Pro', 130.00, 25, 'Luz recargable de alta luminosidad.', 'Luces', 12), -- Bontrager
+('Aro Continental Race', 55.99, 30, 'Aro ligero para carreras.', 'Aros', 2), -- Continental
+('Casco Bontrager Starvos', 150.00, 20, 'Casco versátil para carretera.', 'Casco', 12), -- Bontrager
+('Frenos Campagnolo Record', 200.00, 18, 'Frenos de alto rendimiento.', 'Frenos', 20), -- Shimano (Asumiendo que Campagnolo está relacionado con Shimano)
+('Luz Lezyne Lite Drive 1000XL', 90.00, 60, 'Luz potente y compacta.', 'Luces', 6), -- Lezyne
+('Pedales Look Keo 2 Max', 70.00, 25, 'Pedales para carretera.', 'Pedales', 20), -- Shimano (Asumiendo Look está relacionado con Shimano)
+('Rueda Mavic Ksyrium Elite', 180.00, 12, 'Rueda ligera y resistente.', 'Rueda', 2), -- Continental (Asumiendo Mavic está relacionado con Continental)
+('Casco Scott Arx', 100.00, 22, 'Casco cómodo y seguro.', 'Casco', 21), -- Giro (Asumiendo Scott está relacionado con Giro)
+('Frenos TRP Spyre', 100.00, 28, 'Frenos mecánicos de disco.', 'Frenos', 20), -- Shimano
+('Pedales Time ATAC XC8', 110.00, 14, 'Pedales para MTB.', 'Pedales', 20), -- Shimano
+('Rueda Zipp 303 Firecrest', 1400.00, 8, 'Rueda de carbono aerodinámica.', 'Rueda', 2); -- Continental
 
 
 SELECT * FROM city_cyclist_accessories_categories
