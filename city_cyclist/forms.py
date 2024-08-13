@@ -30,11 +30,12 @@ class BikeForm(forms.ModelForm):
         model = Bike
         fields = '__all__'
         widgets = {
-            'bike_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
             'price': forms.NumberInput(attrs={'class': 'form-control'}),
             'stock': forms.NumberInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control'}),
-            'bike_picture': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+            'product_picture': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+            'brand_bikes': forms.Select(attrs={'class': 'form-control'}),
         }
 
 class AccessoriesForm(forms.ModelForm):
@@ -42,13 +43,16 @@ class AccessoriesForm(forms.ModelForm):
         model = Accessories
         fields = '__all__'
         widgets = {
-            'name_accessories': forms.TextInput(attrs={'class': 'form-control'}),
-            'product_category': forms.Select(attrs={'class': 'form-control'}),
+            'name': forms.TextInput(attrs={'class': 'form-control'}),
             'price': forms.NumberInput(attrs={'class': 'form-control'}),
             'stock': forms.NumberInput(attrs={'class': 'form-control'}),
             'description': forms.Textarea(attrs={'class': 'form-control'}),
             'product_picture': forms.ClearableFileInput(attrs={'class': 'form-control'}),
+            'product_category': forms.Select(attrs={'class': 'form-control'}),
+            'brand_accesories': forms.Select(attrs={'class': 'form-control'}),
         }
+
+     
 
 class CustomerForm(forms.ModelForm):
     class Meta:
@@ -61,7 +65,9 @@ class CustomerForm(forms.ModelForm):
             'email': forms.EmailInput(attrs={'class': 'form-control'}),
             'phone_number': forms.NumberInput(attrs={'class': 'form-control'}),
             'address': forms.TextInput(attrs={'class': 'form-control'}),
+            'genre': forms.Select(attrs={'class': 'form-control'}),
         }
+       
 
 class PaymentTypeForm(forms.ModelForm):
     class Meta:
