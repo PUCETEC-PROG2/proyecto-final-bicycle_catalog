@@ -119,52 +119,56 @@ INSERT INTO city_cyclist_customer (name, last_name, id_card, email, phone_number
 SELECT * FROM city_cyclist_bike
 
 -- Insertar datos en la tabla city_cyclist_bike
-INSERT INTO city_cyclist_bike (bike_name, price, stock, description) VALUES
-('Trek Domane SL 7', 5500.00, 10, 'Bicicleta de carretera de alto rendimiento.'),
-('Specialized Roubaix Pro', 5000.00, 15, 'Bicicleta de carretera con tecnología de suspensión avanzada.'),
-('Giant Defy Advanced 1', 4000.00, 20, 'Bicicleta de carretera para largas distancias.'),
-('Cannondale Synapse Carbon', 3500.00, 25, 'Bicicleta de carretera con cuadro de carbono ligero.'),
-('Bianchi Oltre XR4', 6000.00, 12, 'Bicicleta de carretera con aerodinámica avanzada.'),
-('Scott Addict RC', 4500.00, 18, 'Bicicleta de carretera ligera y rápida.'),
-('Pinarello Dogma F', 7500.00, 8, 'Bicicleta de carretera para profesionales.'),
-('Cervélo R5', 7000.00, 10, 'Bicicleta de carretera para carreras y entrenamiento.'),
-('BMC Teammachine SLR01', 7200.00, 5, 'Bicicleta de carretera con tecnología de suspensión avanzada.'),
-('Merida Reacto 9000', 4000.00, 22, 'Bicicleta de carretera aerodinámica.'),
-('Colnago C64', 7500.00, 7, 'Bicicleta de carretera de gama alta con cuadro de carbono.'),
-('Orbea Orca OMX', 6500.00, 11, 'Bicicleta de carretera con cuadro de carbono ligero.'),
-('Santa Cruz Hightower', 6000.00, 9, 'Bicicleta de montaña con suspensión de alta gama.'),
-('Fuji Altamira', 3500.00, 20, 'Bicicleta de carretera para entrenamiento y competición.'),
-('Raleigh Revenio Carbon', 3000.00, 30, 'Bicicleta de carretera con cuadro de carbono.'),
-('Kona Process 153', 3500.00, 15, 'Bicicleta de montaña para trail y enduro.'),
-('Lapierre Xelius SL', 4500.00, 14, 'Bicicleta de carretera ligera para competición.'),
-('Ridley Helium SL', 5000.00, 13, 'Bicicleta de carretera con cuadro ultraligero.'),
-('De Rosa King XS', 6000.00, 8, 'Bicicleta de carretera con alta tecnología y rendimiento.'),
-('Salsa Warbird', 3500.00, 17, 'Bicicleta de gravel para aventuras en terrenos mixtos.');
+
+INSERT INTO city_cyclist_bike (bike_name, price, stock, description, brand_bikes_id) VALUES
+('Trek Domane SL 7', 5500.00, 10, 'Bicicleta de carretera de alto rendimiento.', 1),
+('Specialized Roubaix Pro', 5000.00, 15, 'Bicicleta de carretera con tecnología de suspensión avanzada.', 2),
+('Giant Defy Advanced 1', 4000.00, 20, 'Bicicleta de carretera para largas distancias.', 3),
+('Cannondale Synapse Carbon', 3500.00, 25, 'Bicicleta de carretera con cuadro de carbono ligero.', 4),
+('Bianchi Oltre XR4', 6000.00, 12, 'Bicicleta de carretera con aerodinámica avanzada.', 5),
+('Scott Addict RC', 4500.00, 18, 'Bicicleta de carretera ligera y rápida.', 6),
+('Pinarello Dogma F', 7500.00, 8, 'Bicicleta de carretera para profesionales.', 7),
+('Cervélo R5', 7000.00, 10, 'Bicicleta de carretera para carreras y entrenamiento.', 8),
+('BMC Teammachine SLR01', 7200.00, 5, 'Bicicleta de carretera con tecnología de suspensión avanzada.', 9),
+('Merida Reacto 9000', 4000.00, 22, 'Bicicleta de carretera aerodinámica.', 10),
+('Colnago C64', 7500.00, 7, 'Bicicleta de carretera de gama alta con cuadro de carbono.', 11),
+('Orbea Orca OMX', 6500.00, 11, 'Bicicleta de carretera con cuadro de carbono ligero.', 12),
+('Santa Cruz Hightower', 6000.00, 9, 'Bicicleta de montaña con suspensión de alta gama.', 13),
+('Fuji Altamira', 3500.00, 20, 'Bicicleta de carretera para entrenamiento y competición.', 14),
+('Raleigh Revenio Carbon', 3000.00, 30, 'Bicicleta de carretera con cuadro de carbono.', 15),
+('Kona Process 153', 3500.00, 15, 'Bicicleta de montaña para trail y enduro.', 16),
+('Lapierre Xelius SL', 4500.00, 14, 'Bicicleta de carretera ligera para competición.', 17),
+('Ridley Helium SL', 5000.00, 13, 'Bicicleta de carretera con cuadro ultraligero.', 18),
+('De Rosa King XS', 6000.00, 8, 'Bicicleta de carretera con alta tecnología y rendimiento.', 19),
+('Salsa Warbird', 3500.00, 17, 'Bicicleta de gravel para aventuras en terrenos mixtos.', 20);
+
 
 
 SELECT * FROM city_cyclist_accessories
 
-INSERT INTO city_cyclist_accessories (name_accessories, product_category, price, stock, description) VALUES
-('Aro Schwalbe 700x25', 'Aros', 50.99, 20, 'Aro de alta calidad.'),
-('Casco Giro Synthe', 'Casco', 220.00, 15, 'Casco aerodinámico y ligero.'),
-('Frenos Shimano Ultegra', 'Frenos', 150.00, 30, 'Frenos de alto rendimiento.'),
-('Luz Cateye Volt 1600', 'Luces', 120.00, 50, 'Luz delantera potente para ciclismo.'),
-('Pedales Crankbrothers Egg', 'Pedales', 85.00, 40, 'Pedales ligeros y resistentes.'),
-('Rueda Continental GP 5000', 'Rueda', 75.99, 25, 'Rueda de alto rendimiento.'),
-('Casco Poc Octal', 'Casco', 250.00, 10, 'Casco ultraligero con gran ventilación.'),
-('Frenos SRAM Force', 'Frenos', 180.00, 20, 'Frenos hidráulicos para ruta.'),
-('Pedales Shimano SPD', 'Pedales', 60.00, 35, 'Pedales automáticos para MTB.'),
-('Luz Bontrager Ion Pro', 'Luces', 130.00, 25, 'Luz recargable de alta luminosidad.'),
-('Aro Continental Race', 'Aros', 55.99, 30, 'Aro ligero para carreras.'),
-('Casco Bontrager Starvos', 'Casco', 150.00, 20, 'Casco versátil para carretera.'),
-('Frenos Campagnolo Record', 'Frenos', 200.00, 18, 'Frenos de alto rendimiento.'),
-('Luz Lezyne Lite Drive 1000XL', 'Luces', 90.00, 60, 'Luz potente y compacta.'),
-('Pedales Look Keo 2 Max', 'Pedales', 70.00, 25, 'Pedales para carretera.'),
-('Rueda Mavic Ksyrium Elite', 'Rueda', 180.00, 12, 'Rueda ligera y resistente.'),
-('Casco Scott Arx', 'Casco', 100.00, 22, 'Casco cómodo y seguro.'),
-('Frenos TRP Spyre', 'Frenos', 100.00, 28, 'Frenos mecánicos de disco.'),
-('Pedales Time ATAC XC8', 'Pedales', 110.00, 14, 'Pedales para MTB.'),
-('Rueda Zipp 303 Firecrest', 'Rueda', 1400.00, 8, 'Rueda de carbono aerodinámica.');
+-- Insertar datos en la tabla city_cyclist_accessories incluyendo el brand_id
+INSERT INTO city_cyclist_accessories (name_accessories, product_category, price, stock, description, brand_accesories_id) VALUES
+('Aro Schwalbe 700x25', 'Aros', 50.99, 20, 'Aro de alta calidad.', 1), -- Schwalbe
+('Casco Giro Synthe', 'Casco', 220.00, 15, 'Casco aerodinámico y ligero.', 21), -- Giro
+('Frenos Shimano Ultegra', 'Frenos', 150.00, 30, 'Frenos de alto rendimiento.', 20), -- Shimano
+('Luz Cateye Volt 1600', 'Luces', 120.00, 50, 'Luz delantera potente para ciclismo.', 11), -- Cateye
+('Pedales Crankbrothers Egg', 'Pedales', 85.00, 40, 'Pedales ligeros y resistentes.', 7), -- Crankbrothers
+('Rueda Continental GP 5000', 'Rueda', 75.99, 25, 'Rueda de alto rendimiento.', 2), -- Continental
+('Casco Poc Octal', 'Casco', 250.00, 10, 'Casco ultraligero con gran ventilación.', 22), -- Poc
+('Frenos SRAM Force', 'Frenos', 180.00, 20, 'Frenos hidráulicos para ruta.', 21), -- SRAM
+('Pedales Shimano SPD', 'Pedales', 60.00, 35, 'Pedales automáticos para MTB.', 20), -- Shimano
+('Luz Bontrager Ion Pro', 'Luces', 130.00, 25, 'Luz recargable de alta luminosidad.', 12), -- Bontrager
+('Aro Continental Race', 'Aros', 55.99, 30, 'Aro ligero para carreras.', 2), -- Continental
+('Casco Bontrager Starvos', 'Casco', 150.00, 20, 'Casco versátil para carretera.', 12), -- Bontrager
+('Frenos Campagnolo Record', 'Frenos', 200.00, 18, 'Frenos de alto rendimiento.', 20), -- Shimano (Asumiendo que Campagnolo está relacionado con Shimano)
+('Luz Lezyne Lite Drive 1000XL', 'Luces', 90.00, 60, 'Luz potente y compacta.', 6), -- Lezyne
+('Pedales Look Keo 2 Max', 'Pedales', 70.00, 25, 'Pedales para carretera.', 20), -- Shimano (Asumiendo Look está relacionado con Shimano)
+('Rueda Mavic Ksyrium Elite', 'Rueda', 180.00, 12, 'Rueda ligera y resistente.', 2), -- Continental (Asumiendo Mavic está relacionado con Continental)
+('Casco Scott Arx', 'Casco', 100.00, 22, 'Casco cómodo y seguro.', 21), -- Giro (Asumiendo Scott está relacionado con Giro)
+('Frenos TRP Spyre', 'Frenos', 100.00, 28, 'Frenos mecánicos de disco.', 20), -- Shimano
+('Pedales Time ATAC XC8', 'Pedales', 110.00, 14, 'Pedales para MTB.', 20), -- Shimano
+('Rueda Zipp 303 Firecrest', 'Rueda', 1400.00, 8, 'Rueda de carbono aerodinámica.', 2); -- Continental
+
 
 SELECT * FROM city_cyclist_accessories_categories
 
@@ -192,76 +196,27 @@ INSERT INTO city_cyclist_accessories_categories (accessories_id, category_id) VA
 
 SELECT * FROM city_cyclist_bike_categories
 
+
 INSERT INTO city_cyclist_bike_categories (bike_id, category_id) VALUES
-(1, 6), -- Trek Domane SL 7 en Gravel
-(2, 6), -- Specialized Roubaix Pro en Gravel
-(3, 6), -- Giant Defy Advanced 1 en Gravel
-(4, 6), -- Cannondale Synapse Carbon en Gravel
-(5, 6), -- Bianchi Oltre XR4 en Gravel
-(6, 6), -- Scott Addict RC en Gravel
-(7, 6), -- Pinarello Dogma F en Gravel
-(8, 6), -- Cervélo R5 en Gravel
-(9, 6), -- BMC Teammachine SLR01 en Gravel
-(10, 6), -- Merida Reacto 9000 en Gravel
-(11, 6), -- Colnago C64 en Gravel
-(12, 6), -- Orbea Orca OMX en Gravel
-(13, 7), -- Santa Cruz Hightower en BMX
-(14, 6), -- Fuji Altamira en Gravel
-(15, 6), -- Raleigh Revenio Carbon en Gravel
-(16, 7), -- Kona Process 153 en BMX
-(17, 6), -- Lapierre Xelius SL en Gravel
-(18, 6), -- Ridley Helium SL en Gravel
-(19, 6), -- De Rosa King XS en Gravel
+(1, 10), -- Trek Domane SL 7 en Fondo
+(2, 10), -- Specialized Roubaix Pro en Fondo
+(3, 10), -- Giant Defy Advanced 1 en Fondo
+(4, 10), -- Cannondale Synapse Carbon en Fondo
+(5, 11), -- Bianchi Oltre XR4 en Sprint
+(6, 11), -- Scott Addict RC en Sprint
+(7, 12), -- Pinarello Dogma F en Escalada
+(8, 12), -- Cervélo R5 en Escalada
+(9, 10), -- BMC Teammachine SLR01 en Fondo
+(10, 11), -- Merida Reacto 9000 en Sprint
+(11, 12), -- Colnago C64 en Escalada
+(12, 10), -- Orbea Orca OMX en Fondo
+(13, 3), -- Santa Cruz Hightower en Montaña (MTB)
+(14, 10), -- Fuji Altamira en Fondo
+(15, 10), -- Raleigh Revenio Carbon en Fondo
+(16, 3), -- Kona Process 153 en Montaña (MTB)
+(17, 12), -- Lapierre Xelius SL en Escalada
+(18, 12), -- Ridley Helium SL en Escalada
+(19, 11), -- De Rosa King XS en Sprint
 (20, 6); -- Salsa Warbird en Gravel
-
-SELECT * FROM city_cyclist_accessories_brands
-
-INSERT INTO city_cyclist_accessories_brands (accessories_id, brandaccessories_id) VALUES
-(1, 1), -- Aro Schwalbe 700x25 con Schwalbe
-(2, 2), -- Casco Giro Synthe con Giro
-(3, 3), -- Frenos Shimano Ultegra con Shimano
-(4, 4), -- Luz Cateye Volt 1600 con Cateye
-(5, 5), -- Pedales Crankbrothers Egg con Crankbrothers
-(6, 6), -- Rueda Continental GP 5000 con Continental
-(7, 7), -- Casco Poc Octal con Poc
-(8, 8), -- Frenos SRAM Force con SRAM
-(9, 9), -- Pedales Shimano SPD con Shimano
-(10, 10), -- Luz Bontrager Ion Pro con Bontrager
-(11, 11), -- Aro Continental Race con Continental
-(12, 12), -- Casco Bontrager Starvos con Bontrager
-(13, 13), -- Frenos Campagnolo Record con Campagnolo
-(14, 14), -- Luz Lezyne Lite Drive 1000XL con Lezyne
-(15, 15), -- Pedales Look Keo 2 Max con Look
-(16, 16), -- Rueda Mavic Ksyrium Elite con Mavic
-(17, 17), -- Casco Scott Arx con Scott
-(18, 18), -- Frenos TRP Spyre con TRP
-(19, 19), -- Pedales Time ATAC XC8 con Time
-(20, 20); -- Rueda Zipp 303 Firecrest con Zipp
-
-SELECT * FROM city_cyclist_bike_brands
-
-truncate city_cyclist_bike_brands
-
-INSERT INTO city_cyclist_bike_brands (bike_id, brandbikes_id) VALUES
-(1, 1), -- Trek Domane SL 7 con Trek
-(2, 2), -- Specialized Roubaix Pro con Specialized
-(3, 3), -- Giant Defy Advanced 1 con Giant
-(4, 4), -- Cannondale Synapse Carbon con Cannondale
-(5, 5), -- Bianchi Oltre XR4 con Bianchi
-(6, 6), -- Scott Addict RC con Scott
-(7, 7), -- Pinarello Dogma F con Pinarello
-(8, 8), -- Cervélo R5 con Cervélo
-(9, 9), -- BMC Teammachine SLR01 con BMC
-(10, 10), -- Merida Reacto 9000 con Merida
-(11, 11), -- Colnago C64 con Colnago
-(12, 12), -- Orbea Orca OMX con Orbea
-(13, 13), -- Santa Cruz Hightower con Santa Cruz
-(14, 14), -- Fuji Altamira con Fuji
-(15, 15), -- Raleigh Revenio Carbon con Raleigh
-(16, 16), -- Kona Process 153 con Kona
-(17, 17), -- Lapierre Xelius SL con Lapierre
-(18, 18), -- Ridley Helium SL con Ridley
-(19, 19), -- De Rosa King XS con De Rosa
-(20, 20); -- Salsa Warbird con Salsa
 
 SELECT * FROM city_cyclist_cartitem

@@ -26,14 +26,13 @@ class Bike(models.Model):
                                 validators=[MinValueValidator(100.00, message="La bicicleta más económica cuesta $100")]) 
     stock = models.PositiveIntegerField() 
     description = models.TextField(blank=True, null=True)
-    brands = models.ManyToManyField(BrandBikes)  
+    brand_bikes = models.ForeignKey(BrandBikes, on_delete=models.CASCADE)
     categories = models.ManyToManyField(Category)  
     bike_picture = models.ImageField(upload_to='bike_images', blank=True, null=True)
 
     def __str__(self):
-        brands = ", ".join([str(brand) for brand in self.brands.all()])
         categories = ", ".join([str(category) for category in self.categories.all()])
-        return f'{self.bike_name} - {brands} - {categories}'
+        return f'{self.bike_name} - {self.brand_bikes} - {categories}'
 
 class Accessories(models.Model):
     name_accessories = models.CharField(max_length=30, unique=True)
@@ -50,14 +49,13 @@ class Accessories(models.Model):
                                 validators=[MinValueValidator(0.99, message="El producto más económico cuesta 0,99")]) 
     stock = models.PositiveIntegerField() 
     description = models.TextField(blank=True, null=True)
-    brands = models.ManyToManyField(BrandAccessories)  
+    brand_accesories = models.ForeignKey(BrandAccessories, on_delete=models.CASCADE)
     categories = models.ManyToManyField(Category)  
     product_picture = models.ImageField(upload_to='product_images', blank=True, null=True)
 
     def __str__(self):
-        brands = ", ".join([str(brand) for brand in self.brands.all()])
         categories = ", ".join([str(category) for category in self.categories.all()])
-        return f'{self.name_accessories} - {brands} - {categories}'
+        return f'{self.name_accessories} - {self.brand_accesories} - {categories}'
 
 class Customer(models.Model):
     name = models.CharField(max_length=30, null=False)
