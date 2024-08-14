@@ -10,7 +10,7 @@ La implementación completa de este proyecto demostrará la capacidad de los est
 <EDWIN CACUANGO - STALIN VINUEZA>
 
 ## Estructura del Proyecto
-
+```bash
 bicycle_shop/              # Proyecto Django
 |- __init__.py
 |- asgi.py
@@ -33,6 +33,7 @@ city_cyclist/       # Aplicación Django
 manage.py
 readme.md
 requirements.txt
+```
 
 ## Objetivos 
 
