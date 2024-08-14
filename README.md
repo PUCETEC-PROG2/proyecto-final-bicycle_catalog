@@ -9,6 +9,31 @@ La implementación completa de este proyecto demostrará la capacidad de los est
 
 <EDWIN CACUANGO - STALIN VINUEZA>
 
+## Estructura del Proyecto
+
+bicycle_shop/              # Proyecto Django
+|- __init__.py
+|- asgi.py
+|- settings.py
+|- urls.py
+|- wsgi.py
+city_cyclist/       # Aplicación Django
+|- media/
+|- migrations/
+  |- __init__.py
+|- templates/
+|- admin.py
+|- apps.py
+|- models.py
+|- tests.py
+|- urls.py
+|- views.py
+|- diagramas/       #Diagramas bd, UML
+.gitignore
+manage.py
+readme.md
+requirements.txt
+
 ## Objetivos 
 
 ### 1. Reconocimiento y Aplicación de Conceptos Básicos de POO
