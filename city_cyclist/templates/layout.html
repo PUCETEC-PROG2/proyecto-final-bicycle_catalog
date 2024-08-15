@@ -1,17 +1,53 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Lista de Órdenes</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bicicletas Snowser</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <main>
+
+<body class="max-w-[1024px] mx-auto p-8">
+    <header class="w-full">
+        <nav>
+            <ul class="flex items-center justify-between ">
+                <li class="flex items-end">
+                    <div class="flex items-end">
+                        <div class="w-12 h-12 bg-slate-200 border rounded-full p-2">
+                            <img src="{% static 'schnauzer.png' %}" />
+                        </div>
+                        <div class="w-10 ml-[-20%] m-[-10%]">
+                            <img src="{% static 'bicicleta.png' %}" />
+                        </div>
+                    </div>
+
+                    <a href='/shop' class="text-2xl">Inicio</a>
+                </li>
+                <div class="flex items-center gap-4">
+                    <li>
+                        <a href='/shop/orders'>Órdenes</a>
+                    </li>
+                    <li>
+                        <a href='/shop/bikes'>Bicicletas</a>
+                    </li>
+                    <li>
+                        <a href='/shop/accessories'>Accesorios</a>
+                    </li>
+                </div>
+            </ul>
+        </nav>
+    </header>
+    <main class="my-8">
         {% block content %}
         {% endblock content %}
     </main>
     <footer class="bg-light text-center py-4 mt-4">
         <div class="container">
-            <p>&copy; 2023 Loco por los discos. Todos los derechos reservados.</p>
+            <p>&copy; 2024 Bicicletas Snowser. Todos los derechos reservados.</p>
         </div>
     </footer>
 </body>
+
 </html>

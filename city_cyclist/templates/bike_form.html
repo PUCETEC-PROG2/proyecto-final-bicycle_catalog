@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container mx-auto p-8 bg-gray-100">
+    <h1 class="text-3xl font-bold mb-6 text-blue-800">{% if form.instance.pk %}Editar Bicicleta{% else %}Agregar Bicicleta{% endif %}</h1>
+    <form method="post" class="bg-white shadow-lg rounded-lg p-6 space-y-4">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="mb-4">
+                <label class="block text-gray-900 text-sm font-bold mb-2" for="{{ field.id_for_label }}">
+                    {{ field.label }}
+                </label>
+                {{ field|safe }}
+                <script>
+                    document.getElementById('{{ field.id_for_label }}').style.borderColor = '#0f172a';
+                </script>
+                {% if field.help_text %}
+                    <p class="text-gray-700 text-xs italic">{{ field.help_text }}</p>
+                {% endif %}
+                {% for error in field.errors %}
+                    <p class="text-red-600 text-xs italic">{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        <div class="flex justify-end">
+            <button type="submit" class="bg-green-600 text-white font-bold py-2 px-4 rounded hover:bg-green-800">
+                {% if form.instance.pk %}Actualizar{% else %}Crear{% endif %}
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock content %}

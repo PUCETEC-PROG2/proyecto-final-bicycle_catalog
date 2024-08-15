@@ -1,9 +1,21 @@
-{% extends "layout.html"%}
+{% extends "layout.html" %}
 {% block content %}
-<h1>Lista de Bicicletas</h1>
-    <ul>
+<div class="container mx-auto p-8 bg-gray-100">
+    <h1 class="text-3xl font-bold mb-6 text-blue-600">Lista de Bicicletas</h1>
+    <div class="mb-4">
+        <a href="{% url 'bike_create' %}" class="bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-700">Agregar Bicicleta</a>
+    </div>
+    <ul class="space-y-4 grid grid-cols-2 gap-4">
         {% for bike in bikes %}
-            <li>{{ bike.name }} - Precio: {{ bike.price }} - Stock: {{ bike.stock }}</li>
+            <li class="bg-white shadow-md rounded-lg p-4 flex justify-between items-center hover:bg-blue-50">
+                <a href="{% url 'bike_detail' pk=bike.pk %}">
+                    <h2>{{ bike.name }}</h2>
+                    <p class="text-gray-600">Precio: <span class="text-red-600">${{ bike.price }}</span></p>
+                    <p class="text-gray-600">Stock: <span class="text-red-600">{{ bike.stock }}</span></p>
+                </a>
+                <a href="{% url 'bike_edit' pk=bike.pk %}" class="text-blue-500 hover:underline">Editar</a>
+            </li>
         {% endfor %}
     </ul>
-{% endblock content%}
+</div>
+{% endblock content %}

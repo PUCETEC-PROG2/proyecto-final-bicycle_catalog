@@ -1,11 +1,16 @@
 {% extends "layout.html"%}
 {% block content %} 
-<h1>Lista de Órdenes</h1>
-    <ul>
-        {% for order in orders %}
-            <li><a href="{% url 'order_detail' order.id %}">Orden de {{ order.client }} - {{ order.date }}</a></li>
-        {% endfor %}
-    </ul>
-    <a href="{% url 'create_order' %}">Crear Nueva Orden</a>
-
-{% endblock content%}
+<h1 style="font-size: 2em; color: #1e3a8a; margin-bottom: 20px;">Lista de Órdenes</h1>
+<ul style="list-style-type: none; padding: 0;">
+    {% for order in orders %}
+        <li style="margin-bottom: 10px;">
+            <a href="{% url 'order_detail' order.id %}" style="text-decoration: none; color: #1d4ed8; font-weight: bold;">
+                Orden de {{ order.client }} - {{ order.date }}
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'create_order' %}" style="display: inline-block; margin-top: 20px; padding: 10px 20px; background-color: #10b981; color: white; text-decoration: none; border-radius: 5px;">
+    Crear Nueva Orden
+</a>
+{% endblock content %}

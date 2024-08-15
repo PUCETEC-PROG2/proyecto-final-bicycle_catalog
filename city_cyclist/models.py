@@ -165,39 +165,38 @@ class Cart:
     Clase que gestiona todos los productos seleccionados por el titular.
     Es no persistente, por lo que no debería almacenarse en la bd.
     """
-    def __init__(self):
-        self.items = []
+    def __init__(self, request):
+        self.session = request.session
+        cart = self.session.get('cart')
+        if not cart:
+            cart = self.session['cart'] = []
+        self.items = cart
 
     def add_item(self, product, quantity=1):
-        """
-        Agrega productos al carrito
-        """
         if not isinstance(product, Product):
             raise TypeError('El producto debe ser una instancia de la clase Product')
         for item in self.items:
-            if item['product'] == product:
+            if item['product'].id == product.id:
                 item['quantity'] += quantity
                 break
         else:
             self.items.append({'product': product, 'quantity': quantity})
+        self.save()
 
     def remove_item(self, product):
-        """
-        Elimina un producto del carrito.
-        """
-        self.items = [item for item in self.items if item['product'] != product]
+        self.items = [item for item in self.items if item['product'].id != product.id]
+        self.save()
 
     def calculate_subtotal(self):
-        """
-        Calcula el subtotal basado en los productos y sus cantidades en el carrito.
-        """
         subtotal = Decimal('0.00')
         for item in self.items:
             subtotal += item['product'].price * item['quantity']
         return subtotal
 
     def clear(self):
-        """
-        Vacía el carrito.
-        """
         self.items = []
+        self.save()
+
+    def save(self):
+        self.session['cart'] = self.items
+        self.session.modified = True

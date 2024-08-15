@@ -1,9 +1,13 @@
 {% extends "layout.html"%}
-{% block content%}
-    <h1>Crear Orden</h1>
-    <form method="post">
+{% block content %}
+<div class="container mx-auto p-8 bg-gray-100">
+    <h1 class="text-3xl font-bold mb-6 text-blue-800">Crear Orden</h1>
+    <form method="post" class="bg-white shadow-lg rounded-lg p-6 space-y-4">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Crear</button>
+        <button type="submit" class="bg-green-600 text-white font-bold py-2 px-4 rounded hover:bg-green-800">
+            Crear
+        </button>
     </form>
-{%endblock content%}
+</div>
+{% endblock content %}

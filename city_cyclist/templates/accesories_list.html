@@ -1,9 +1,0 @@
-{% extends "layout.html"%}
-{% block content %} 
-    <h1>Lista de Accesorios</h1>
-    <ul>
-        {% for accessory in accessories %}
-            <li>{{ accessory.name }} - Precio: {{ accessory.price }} - Stock: {{ accessory.stock }}</li>
-        {% endfor %}
-    </ul>
-{% endblock content%}

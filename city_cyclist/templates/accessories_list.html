@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block content %} 
+    <div class="container mx-auto p-8 bg-gray-100">
+        <h1 class="text-3xl font-bold mb-6 text-blue-600">Lista de Accesorios</h1>
+        <ul class="space-y-4 grid grid-cols-2 gap-4">
+            {% for accessory in accessories %}
+                <li class="bg-white shadow-md rounded-lg p-4 flex justify-between items-center hover:bg-blue-50">
+                    <div>
+                        <h2 class="text-xl font-semibold text-blue-800">{{ accessory.name }}</h2>
+                        <p class="text-gray-600">Precio: <span class="text-green-600">${{ accessory.price }}</span></p>
+                        <p class="text-gray-600">Stock: <span class="text-red-600">{{ accessory.stock }}</span></p>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock content %}
