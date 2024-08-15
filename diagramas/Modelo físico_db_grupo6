@@ -1,0 +1,99 @@
+-- Crear tabla de categorías
+CREATE TABLE city_cyclist_category (
+    id_category serial NOT NULL PRIMARY KEY, 
+    category_name varchar(30) NOT NULL UNIQUE
+);
+
+-- Crear tabla de marcas de bicicletas
+CREATE TABLE city_cyclist_brandbikes (
+    id_brand_bike serial NOT NULL PRIMARY KEY, 
+    brand_bike varchar(30) NOT NULL UNIQUE
+);
+
+-- Crear tabla de marcas de accesorios
+CREATE TABLE city_cyclist_brandaccessories (
+    id_brand_accessories serial NOT NULL PRIMARY KEY, 
+    brand_product varchar(30) NOT NULL UNIQUE
+);
+
+-- Crear tabla de clientes
+CREATE TABLE city_cyclist_customer (
+    id_customer serial NOT NULL PRIMARY KEY, 
+    name varchar(30) NOT NULL,
+    last_name varchar(30) NOT NULL,
+    id_card varchar(10) NOT NULL UNIQUE CHECK (id_card ~ '^\d{10}$'),
+    email varchar(50) NOT NULL UNIQUE,
+    phone_number varchar(15) NOT NULL CHECK (phone_number ~ '^\d{7,15}$'),
+    genre varchar(30) NOT NULL,
+    address varchar(50) NOT NULL
+);
+
+-- Crear tabla de tipos de pago
+CREATE TABLE city_cyclist_paymenttype (
+    id_payment_type serial NOT NULL PRIMARY KEY, 
+    pay_name varchar(30) NOT NULL UNIQUE
+);
+
+-- Crear tabla de bicicletas
+CREATE TABLE city_cyclist_bike (
+    id_bike serial NOT NULL PRIMARY KEY, 
+    name varchar(50) NOT NULL UNIQUE,
+    price numeric(10,2) NOT NULL CHECK (price >= 0.99),
+    stock integer NOT NULL CHECK (stock >= 0),
+    description text,
+    product_picture varchar(100),
+    brand_bikes_id integer NOT NULL,
+    CONSTRAINT fk_brand_bikes FOREIGN KEY (brand_bikes_id) REFERENCES city_cyclist_brandbikes (id_brand_bike) ON DELETE CASCADE
+);
+
+-- Crear tabla de accesorios
+CREATE TABLE city_cyclist_accessories (
+    id_accessories serial NOT NULL PRIMARY KEY, 
+    name varchar(50) NOT NULL UNIQUE,
+    price numeric(10,2) NOT NULL CHECK (price >= 0.99),
+    stock integer NOT NULL CHECK (stock >= 0),
+    description text,
+    product_picture varchar(100),
+    product_category varchar(30) NOT NULL,
+    brand_accessories_id integer NOT NULL,
+    CONSTRAINT fk_brand_accessories FOREIGN KEY (brand_accessories_id) REFERENCES city_cyclist_brandaccessories (id_brand_accessories) ON DELETE CASCADE
+);
+
+-- Crear tabla de categorías de bicicletas
+CREATE TABLE city_cyclist_bike_categories (
+    id_bike_category serial NOT NULL PRIMARY KEY, 
+    bike_id integer NOT NULL,
+    category_id integer NOT NULL,
+    CONSTRAINT fk_bike FOREIGN KEY (bike_id) REFERENCES city_cyclist_bike (id_bike) ON DELETE CASCADE,
+    CONSTRAINT fk_category FOREIGN KEY (category_id) REFERENCES city_cyclist_category (id_category),
+    UNIQUE (bike_id, category_id)
+);
+
+-- Crear tabla de categorías de accesorios
+CREATE TABLE city_cyclist_accessories_categories (
+    id_accessories_category serial NOT NULL PRIMARY KEY, 
+    accessories_id integer NOT NULL,
+    category_id integer NOT NULL,
+    CONSTRAINT fk_accessories FOREIGN KEY (accessories_id) REFERENCES city_cyclist_accessories (id_accessories) ON DELETE CASCADE,
+    CONSTRAINT fk_category FOREIGN KEY (category_id) REFERENCES city_cyclist_category (id_category),
+    UNIQUE (accessories_id, category_id)
+);
+
+-- Crear tabla de carrito de compras
+CREATE TABLE city_cyclist_cartitem (
+    id_cart_item serial NOT NULL PRIMARY KEY, 
+    customer_id integer NOT NULL,
+    date date NOT NULL,
+    country varchar(30) NOT NULL,
+    city varchar(30) NOT NULL,
+    payment_type_id integer NOT NULL,
+    bike_id integer,
+    bicycle_numbers integer NOT NULL DEFAULT 1 CHECK (bicycle_numbers >= 1),
+    accessories_id integer,
+    accessorie_numbers integer NOT NULL DEFAULT 1 CHECK (accessorie_numbers >= 1),
+    CONSTRAINT fk_customer FOREIGN KEY (customer_id) REFERENCES city_cyclist_customer (id_customer) ON DELETE CASCADE,
+    CONSTRAINT fk_payment_type FOREIGN KEY (payment_type_id) REFERENCES city_cyclist_paymenttype (id_payment_type) ON DELETE RESTRICT,
+    CONSTRAINT fk_bike FOREIGN KEY (bike_id) REFERENCES city_cyclist_bike (id_bike) ON DELETE CASCADE,
+    CONSTRAINT fk_accessories FOREIGN KEY (accessories_id) REFERENCES city_cyclist_accessories (id_accessories) ON DELETE CASCADE
+);
+
