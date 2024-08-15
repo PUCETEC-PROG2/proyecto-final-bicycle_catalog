@@ -1,3 +1,94 @@
+--Crear tabla categoria
+CREATE TABLE city_cyclist_category (
+    "id" serial NOT NULL PRIMARY KEY,
+    "category_name" varchar(30) NOT NULL UNIQUE
+);
+
+--Crear tabla marcas Bicicletas
+CREATE TABLE city_cyclist_brandbikes (
+    "id" serial NOT NULL PRIMARY KEY,
+    "brand_bike" varchar(30) NOT NULL UNIQUE
+);
+
+
+--Crear tabla Marcas Accesorios
+CREATE TABLE city_cyclist_brandaccessories (
+    "id" serial NOT NULL PRIMARY KEY,
+    "brand_product" varchar(30) NOT NULL UNIQUE
+);
+
+--Crear tabla Cliente
+CREATE TABLE city_cyclist_customer (
+    "id" serial NOT NULL PRIMARY KEY,
+    "name" varchar(30) NOT NULL,
+    "last_name" varchar(30) NOT NULL,
+    "id_card" varchar(10) NOT NULL UNIQUE CHECK (id_card ~ '^\d{10}$'),
+    "email" varchar(50) NOT NULL UNIQUE,
+    "phone_number" varchar(15) NOT NULL CHECK (phone_number ~ '^\d{7,15}$'),
+    "genre" varchar(30) NOT NULL,
+    "address" varchar(50) NOT NULL
+);
+
+--Crear tabla tipo de pago
+CREATE TABLE city_cyclist_paymenttype (
+    "id" serial NOT NULL PRIMARY KEY,
+    "pay_name" varchar(30) NOT NULL UNIQUE
+);
+
+--Crear tabla Bicicleta
+CREATE TABLE city_cyclist_bike (
+    "id" serial NOT NULL PRIMARY KEY,
+    "name" varchar(50) NOT NULL UNIQUE,
+    "price" numeric(10,2) NOT NULL CHECK (price >= 0.99),
+    "stock" integer NOT NULL CHECK (stock >= 0),
+    "description" text,
+    "product_picture" varchar(100),
+    "brand_bikes_id" integer NOT NULL REFERENCES city_cyclist_brandbikes ("id") ON DELETE CASCADE
+);
+
+--Crear tabala Accesoros
+CREATE TABLE city_cyclist_accessories (
+    "id" serial NOT NULL PRIMARY KEY,
+    "name" varchar(50) NOT NULL UNIQUE,
+    "price" numeric(10,2) NOT NULL CHECK (price >= 0.99),
+    "stock" integer NOT NULL CHECK (stock >= 0),
+    "description" text,
+    "product_picture" varchar(100),
+    "product_category" varchar(30) NOT NULL,
+    "brand_accesories_id" integer NOT NULL REFERENCES city_cyclist_brandaccessories ("id") ON DELETE CASCADE
+);
+
+--Crear tabla bicicleta-categoria
+CREATE TABLE city_cyclist_bike_categories (
+    "id" serial NOT NULL PRIMARY KEY,
+    "bike_id" integer NOT NULL REFERENCES city_cyclist_bike ("id") ON DELETE CASCADE,
+    "category_id" integer NOT NULL REFERENCES city_cyclist_category ("id") ON DELETE CASCADE,
+    UNIQUE ("bike_id", "category_id")
+);
+
+--Crear tabla accesorios-categoria
+CREATE TABLE city_cyclist_accessories_categories (
+    "id" serial NOT NULL PRIMARY KEY,
+    "accessories_id" integer NOT NULL REFERENCES city_cyclist_accessories ("id") ON DELETE CASCADE,
+    "category_id" integer NOT NULL REFERENCES city_cyclist_category ("id") ON DELETE CASCADE,
+    UNIQUE ("accessories_id", "category_id")
+);
+
+--Crear tabla CartItem
+CREATE TABLE city_cyclist_cartitem (
+    "id" serial NOT NULL PRIMARY KEY,
+    "customer_id" integer NOT NULL REFERENCES city_cyclist_customer ("id") ON DELETE CASCADE,
+    "date" date NOT NULL,
+    "country" varchar(30) NOT NULL,
+    "city" varchar(30) NOT NULL,
+    "payment_type_id" integer NOT NULL REFERENCES city_cyclist_paymenttype ("id") ON DELETE RESTRICT,
+    "bike_id" integer REFERENCES city_cyclist_bike ("id") ON DELETE CASCADE,
+    "bicycle_numbers" integer NOT NULL DEFAULT 1 CHECK (bicycle_numbers >= 1),
+    "accessories_id" integer REFERENCES city_cyclist_accessories ("id") ON DELETE CASCADE,
+    "accessorie_numbers" integer NOT NULL DEFAULT 1 CHECK (accessorie_numbers >= 1)
+);
+
+--Ingreso de datos de marcas de biicicletas
 SELECT * FROM city_cyclist_brandbikes
 
 INSERT INTO city_cyclist_brandbikes (brand_bike) VALUES
@@ -22,6 +113,7 @@ INSERT INTO city_cyclist_brandbikes (brand_bike) VALUES
 ('De Rosa'),
 ('Salsa');
 
+--Ingreso de datos de marcas de accesorios
 SELECT * FROM city_cyclist_brandaccessories
 
 INSERT INTO city_cyclist_brandaccessories (brand_product) VALUES
@@ -49,7 +141,7 @@ INSERT INTO city_cyclist_brandaccessories (brand_product) VALUES
 ('Giro'),
 ('Poc');
 
-
+--Ingreso de datos de Categorias
 SELECT * FROM city_cyclist_category
 
 INSERT INTO city_cyclist_category (category_name) VALUES
@@ -74,6 +166,7 @@ INSERT INTO city_cyclist_category (category_name) VALUES
 ('Juegos Olímpicos'),
 ('Paraciclismo');
 
+--Ingreso de datos de marcas de Tipos de pago
 SELECT * FROM city_cyclist_paymenttype
 
 INSERT INTO city_cyclist_paymenttype (pay_name) VALUES
@@ -92,30 +185,33 @@ INSERT INTO city_cyclist_paymenttype (pay_name) VALUES
 ('Pago por Factura'),
 ('Canje');
 
+--Ingreso de datos de cliente
 SELECT * FROM city_cyclist_customer
 
-INSERT INTO city_cyclist_customer (name, last_name, id_card, email, phone_number, address) VALUES
-('Juan', 'Pérez', '1234567890', 'juan.perez@example.com', '1234567', 'Calle 1, No. 101'),
-('Ana', 'García', '2345678901', 'ana.garcia@example.com', '23456789', 'Calle 2, No. 202'),
-('Carlos', 'Rodríguez', '3456789012', 'carlos.rodriguez@example.com', '3456789012', 'Calle 3, No. 303'),
-('María', 'López', '4567890123', 'maria.lopez@example.com', '456789012', 'Calle 4, No. 404'),
-('Pedro', 'Martínez', '5678901234', 'pedro.martinez@example.com', '567890123', 'Calle 5, No. 505'),
-('Laura', 'Fernández', '6789012345', 'laura.fernandez@example.com', '678901234', 'Calle 6, No. 606'),
-('José', 'González', '7890123456', 'jose.gonzalez@example.com', '7890123456', 'Calle 7, No. 707'),
-('Isabel', 'Torres', '8901234567', 'isabel.torres@example.com', '890123456', 'Calle 8, No. 808'),
-('Miguel', 'Ángel', '9012345678', 'miguel.angel@example.com', '9012345678', 'Calle 9, No. 909'),
-('Patricia', 'Díaz', '0123456789', 'patricia.diaz@example.com', '012345678', 'Calle 10, No. 1010'),
-('Javier', 'Morales', '1234567891', 'javier.morales@example.com', '123456789', 'Calle 11, No. 1111'),
-('Carolina', 'Gómez', '2345678902', 'carolina.gomez@example.com', '234567890', 'Calle 12, No. 1212'),
-('Francisco', 'Ramírez', '3456789013', 'francisco.ramirez@example.com', '345678901', 'Calle 13, No. 1313'),
-('Andrea', 'Castro', '4567890124', 'andrea.castro@example.com', '456789012', 'Calle 14, No. 1414'),
-('Luis', 'Martínez', '5678901235', 'luis.martinez@example.com', '5678901234', 'Calle 15, No. 1515'),
-('Marta', 'Ruiz', '6789012346', 'marta.ruiz@example.com', '6789012345', 'Calle 16, No. 1616'),
-('Sergio', 'López', '7890123457', 'sergio.lopez@example.com', '7890123457', 'Calle 17, No. 1717'),
-('Valeria', 'Romero', '8901234568', 'valeria.romero@example.com', '8901234567', 'Calle 18, No. 1818'),
-('Ángel', 'Martínez', '9012345679', 'angel.martinez@example.com', '9012345679', 'Calle 19, No. 1919'),
-('Claudia', 'Vargas', '0123456790', 'claudia.vargas@example.com', '012345679', 'Calle 20, No. 2020');
+INSERT INTO city_cyclist_customer (name, last_name, id_card, email, phone_number, genre, address) VALUES
+('Juan', 'Pérez', '1234567890', 'juan.perez@example.com', '1234567', 'Masculino', 'Calle 1, No. 101'),
+('Ana', 'García', '2345678901', 'ana.garcia@example.com', '23456789', 'Femenino', 'Calle 2, No. 202'),
+('Carlos', 'Rodríguez', '3456789012', 'carlos.rodriguez@example.com', '3456789012', 'Masculino', 'Calle 3, No. 303'),
+('María', 'López', '4567890123', 'maria.lopez@example.com', '456789012', 'Femenino', 'Calle 4, No. 404'),
+('Pedro', 'Martínez', '5678901234', 'pedro.martinez@example.com', '567890123', 'Masculino', 'Calle 5, No. 505'),
+('Laura', 'Fernández', '6789012345', 'laura.fernandez@example.com', '678901234', 'Femenino', 'Calle 6, No. 606'),
+('José', 'González', '7890123456', 'jose.gonzalez@example.com', '7890123456', 'Masculino', 'Calle 7, No. 707'),
+('Isabel', 'Torres', '8901234567', 'isabel.torres@example.com', '890123456', 'Femenino', 'Calle 8, No. 808'),
+('Miguel', 'Ángel', '9012345678', 'miguel.angel@example.com', '9012345678', 'Masculino', 'Calle 9, No. 909'),
+('Patricia', 'Díaz', '0123456789', 'patricia.diaz@example.com', '012345678', 'Femenino', 'Calle 10, No. 1010'),
+('Javier', 'Morales', '1234567891', 'javier.morales@example.com', '123456789', 'Masculino', 'Calle 11, No. 1111'),
+('Carolina', 'Gómez', '2345678902', 'carolina.gomez@example.com', '234567890', 'Femenino', 'Calle 12, No. 1212'),
+('Francisco', 'Ramírez', '3456789013', 'francisco.ramirez@example.com', '345678901', 'Masculino', 'Calle 13, No. 1313'),
+('Andrea', 'Castro', '4567890124', 'andrea.castro@example.com', '456789012', 'Femenino', 'Calle 14, No. 1414'),
+('Luis', 'Martínez', '5678901235', 'luis.martinez@example.com', '5678901234', 'Masculino', 'Calle 15, No. 1515'),
+('Marta', 'Ruiz', '6789012346', 'marta.ruiz@example.com', '6789012345', 'Femenino', 'Calle 16, No. 1616'),
+('Sergio', 'López', '7890123457', 'sergio.lopez@example.com', '7890123457', 'Masculino', 'Calle 17, No. 1717'),
+('Valeria', 'Romero', '8901234568', 'valeria.romero@example.com', '8901234567', 'Femenino', 'Calle 18, No. 1818'),
+('Ángel', 'Martínez', '9012345679', 'angel.martinez@example.com', '9012345679', 'Masculino', 'Calle 19, No. 1919'),
+('Claudia', 'Vargas', '0123456790', 'claudia.vargas@example.com', '012345679', 'Femenino', 'Calle 20, No. 2020');
 
+
+--Ingreso de datos de bicicletas
 SELECT * FROM city_cyclist_bike
 
 -- Insertar datos en la tabla city_cyclist_bike
@@ -143,10 +239,11 @@ INSERT INTO city_cyclist_bike (name, price, stock, description, brand_bikes_id) 
 ('Salsa Warbird', 3500.00, 17, 'Bicicleta de gravel para aventuras en terrenos mixtos.', 20);
 
 
-
+--Ingreso de datos de accesorios
 SELECT * FROM city_cyclist_accessories
 
--- Insertar datos en la tabla city_cyclist_accessories incluyendo el brand_id
+-- Insertar datos en la tabla city_cyclist_accessories 
+
 INSERT INTO city_cyclist_accessories (name, price, stock, description, product_category, brand_accesories_id) VALUES
 ('Aro Schwalbe 700x25', 50.99, 20, 'Aro de alta calidad.', 'Aros', 1), -- Schwalbe
 ('Casco Giro Synthe', 220.00, 15, 'Casco aerodinámico y ligero.', 'Casco', 21), -- Giro
@@ -169,7 +266,7 @@ INSERT INTO city_cyclist_accessories (name, price, stock, description, product_c
 ('Pedales Time ATAC XC8', 110.00, 14, 'Pedales para MTB.', 'Pedales', 20), -- Shimano
 ('Rueda Zipp 303 Firecrest', 1400.00, 8, 'Rueda de carbono aerodinámica.', 'Rueda', 2); -- Continental
 
-
+--Ingreso de datos relación accesorio-marca
 SELECT * FROM city_cyclist_accessories_categories
 
 INSERT INTO city_cyclist_accessories_categories (accessories_id, category_id) VALUES
@@ -194,8 +291,8 @@ INSERT INTO city_cyclist_accessories_categories (accessories_id, category_id) VA
 (19, 5), -- Pedales Time ATAC XC8 en Pedales
 (20, 6); -- Rueda Zipp 303 Firecrest en Rueda
 
+--Ingreso de datos relación bicicleta-marca
 SELECT * FROM city_cyclist_bike_categories
-
 
 INSERT INTO city_cyclist_bike_categories (bike_id, category_id) VALUES
 (1, 10), -- Trek Domane SL 7 en Fondo
