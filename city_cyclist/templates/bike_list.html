@@ -1,0 +1,9 @@
+{% extends "layout.html"%}
+{% block content %}
+<h1>Lista de Bicicletas</h1>
+    <ul>
+        {% for bike in bikes %}
+            <li>{{ bike.name }} - Precio: {{ bike.price }} - Stock: {{ bike.stock }}</li>
+        {% endfor %}
+    </ul>
+{% endblock content%}

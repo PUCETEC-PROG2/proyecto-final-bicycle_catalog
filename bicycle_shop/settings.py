@@ -81,8 +81,11 @@ DATABASES = {
         'NAME': 'grupo6',
         'HOST': 'localhost',
         'PORT': '5432',
-        'USER': 'stalin',
-        'PASSWORD': 'Romi19'
+        # 'USER': 'stalin',
+        'USER':'ewin',
+        # 'PASSWORD': 'Romi19',
+        'PASSWORD': ''
+
     }
 }
 
