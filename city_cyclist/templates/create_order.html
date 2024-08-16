@@ -1,13 +1,41 @@
-{% extends "layout.html"%}
+ {% extends "layout.html" %}
 {% block content %}
 <div class="container mx-auto p-8 bg-gray-100">
     <h1 class="text-3xl font-bold mb-6 text-blue-800">Crear Orden</h1>
     <form method="post" class="bg-white shadow-lg rounded-lg p-6 space-y-4">
         {% csrf_token %}
-        {{ form.as_p }}
+        {{ form.client.as_p }}
+        {{ form.country.as_p }}
+        {{ form.city.as_p }}
+        {{ form.address.as_p }}
+        {{ form.method_payment.as_p }}
+        <div>
+            <h2 class="text-xl font-bold mb-2">Bicicletas</h2>
+            {% for bike in form.bikes.field.queryset %}
+                <div>
+                    <label>
+                        <input type="checkbox" name="bikes" value="{{ bike.pk }}">
+                        {{ bike.name }}
+                    </label>
+                    <input type="number" name="bike_quantity_{{ bike.pk }}" min="1" value="1">
+                </div>
+            {% endfor %}
+        </div>
+        <div>
+            <h2 class="text-xl font-bold mb-2">Accesorios</h2>
+            {% for accessory in form.accessories.field.queryset %}
+                <div>
+                    <label>
+                        <input type="checkbox" name="accessories" value="{{ accessory.pk }}">
+                        {{ accessory.name }}
+                    </label>
+                    <input type="number" name="accessory_quantity_{{ accessory.pk }}" min="1" value="1">
+                </div>
+            {% endfor %}
+        </div>
         <button type="submit" class="bg-green-600 text-white font-bold py-2 px-4 rounded hover:bg-green-800">
             Crear
         </button>
     </form>
 </div>
-{% endblock content %}
+{% endblock content %} 

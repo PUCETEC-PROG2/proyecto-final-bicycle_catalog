@@ -63,17 +63,40 @@ def accessories_list(request):
     accessories = Accessories.objects.all()
     return render(request, 'accessories_list.html', {'accessories': accessories})
 
+# def create_order(request):
+#     cart = Cart(request)
+#     if request.method == 'POST':
+#         form = OrderForm(request.POST)
+#         if form.is_valid():
+#             client = form.cleaned_data['client']
+#             country = form.cleaned_data['country']
+#             city = form.cleaned_data['city']
+#             address = form.cleaned_data['address']
+#             method_payment = form.cleaned_data['method_payment']
+#             order = Order.create_from_cart(client, cart, country, city, address, method_payment)
+#             cart.clear()
+#             return redirect('order_list')
+#     else:
+#         form = OrderForm()
+#     return render(request, 'create_order.html', {'form': form})
+
 def create_order(request):
     cart = Cart(request)
     if request.method == 'POST':
         form = OrderForm(request.POST)
         if form.is_valid():
-            client = form.cleaned_data['client']
-            country = form.cleaned_data['country']
-            city = form.cleaned_data['city']
-            address = form.cleaned_data['address']
-            method_payment = form.cleaned_data['method_payment']
-            order = Order.create_from_cart(client, cart, country, city, address, method_payment)
+            order = form.save(commit=False)
+            order.save()
+            form.save_m2m()  # Guardar las relaciones ManyToMany
+            # Procesar las cantidades
+            bike_quantities = form.cleaned_data['bike_quantities']
+            accessory_quantities = form.cleaned_data['accessory_quantities']
+            for bike_id, quantity in bike_quantities.items():
+                bike = Bike.objects.get(pk=bike_id)
+                cart.add_item(bike, quantity)
+            for accessory_id, quantity in accessory_quantities.items():
+                accessory = Accessories.objects.get(pk=accessory_id)
+                cart.add_item(accessory, quantity)
             cart.clear()
             return redirect('order_list')
     else:
